@@ -1,0 +1,10 @@
+### Get Hello Message
+GET http://localhost:3000/api/hello
+
+### Echo Test
+POST http://localhost:3000/api/echo
+Content-Type: application/json
+
+{
+  "message": "This is a test"
+}
