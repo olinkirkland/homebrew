@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import { logger } from '../utils/logger';
 
 export async function connectToDatabase() {
     dotenv.config();
@@ -11,5 +12,5 @@ export async function connectToDatabase() {
         );
 
     await mongoose.connect(DB_URI);
-    console.log('MongoDB connected successfully');
+    logger.info('MongoDB connected successfully');
 }
