@@ -1,0 +1,21 @@
+### Register a new user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpassword"
+}
+
+### Login with the registered user
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpassword"
+}
+
+### Logout (if applicable)
+POST http://localhost:3000/api/auth/logout
+Authorization: Bearer <YOUR_JWT_TOKEN>
