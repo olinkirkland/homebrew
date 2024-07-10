@@ -12,5 +12,5 @@ export async function connectToDatabase() {
         );
 
     await mongoose.connect(DB_URI);
-    logger.info('MongoDB connected successfully');
+    logger.info('MongoDB connected successfully', { address: DB_URI });
 }

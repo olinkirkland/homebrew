@@ -1,18 +1,18 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import { routes } from './config/routes';
 import { connectToDatabase } from './config/database';
+import { routes } from './config/routes';
 import { logger } from './utils/logger';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 async function startServer() {
     logger.info('Starting the server...');
     try {
         await connectToDatabase();
-    } catch (err) {
-        logger.error('Error connecting to the database: ', err);
+    } catch (error) {
+        logger.error('Error connecting to the database', { error });
         process.exit(1);
     }
 
@@ -24,8 +24,8 @@ async function startServer() {
     app.use('/api', routes); // Assuming all routes are prefixed with '/api'
 
     // Start the server
-    app.listen(PORT, () => {
-        logger.info(`Server is running on port ${PORT}`);
+    app.listen(port, () => {
+        logger.info('Server is running', { port });
     });
 }
 
