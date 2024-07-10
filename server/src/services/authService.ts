@@ -1,3 +1,7 @@
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import User from '../models/User';
+
 /**
  * Registers a new user.
  * @param {string} username - The username of the new user.
@@ -8,7 +12,22 @@ export async function register(
     username: string,
     password: string
 ): Promise<{ success: boolean; message?: string }> {
-    /* ... */
+    // Check if the user already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+        return { success: false, message: 'Username already taken' };
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const newUser = new User({ username, password: hashedPassword });
+
+    // Save the user to the database
+    await newUser.save();
+
+    return { success: true, message: 'User registered successfully' };
 }
 
 /**
@@ -22,6 +41,7 @@ export async function login(
     password: string
 ): Promise<{ success: boolean; token?: string; message?: string }> {
     /* ... */
+    return { success: false, message: 'Not implemented' };
 }
 
 /**
@@ -42,6 +62,7 @@ export async function verifyEmail(
     token: string
 ): Promise<{ success: boolean; message?: string }> {
     /* ... */
+    return { success: false, message: 'Not implemented' };
 }
 
 /**
@@ -53,6 +74,7 @@ export async function resendVerification(
     email: string
 ): Promise<{ success: boolean; message?: string }> {
     /* ... */
+    return { success: false, message: 'Not implemented' };
 }
 
 /**
@@ -64,6 +86,7 @@ export async function forgotPassword(
     email: string
 ): Promise<{ success: boolean; message?: string }> {
     /* ... */
+    return { success: false, message: 'Not implemented' };
 }
 
 /**
@@ -77,4 +100,5 @@ export async function resetPassword(
     newPassword: string
 ): Promise<{ success: boolean; message?: string }> {
     /* ... */
+    return { success: false, message: 'Not implemented' };
 }
