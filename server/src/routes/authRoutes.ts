@@ -1,15 +1,22 @@
 import { Router } from 'express';
-import { register, login, logout } from '../controllers/authController';
+import {
+    register,
+    login,
+    logout,
+    verifyEmail,
+    resendVerification,
+    forgotPassword,
+    resetPassword,
+} from '../controllers/authController';
 
 const router = Router();
 
-// POST /api/auth/register
 router.post('/register', register);
-
-// POST /api/auth/login
 router.post('/login', login);
-
-// POST /api/auth/logout
 router.post('/logout', logout);
+router.post('/verify-email', verifyEmail);
+router.post('/resend-verification', resendVerification);
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password', resetPassword);
 
 export default router;

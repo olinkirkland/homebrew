@@ -8,6 +8,6 @@ const router = Router();
 router.use('/auth', authRoutes);
 
 // User management routes
-router.use('/users', userRoutes);
+router.use('/user', userRoutes);
 
 export { router as routes };

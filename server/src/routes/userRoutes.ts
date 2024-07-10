@@ -1,23 +1,16 @@
 import { Router } from 'express';
 import {
-    getUsers,
-    getUserById,
-    updateUserById,
-    deleteUserById,
+    getMe,
+    updateProfile,
+    changePassword,
+    deleteUser,
 } from '../controllers/userController';
 
 const router = Router();
 
-// GET /api/users
-router.get('/', getUsers);
-
-// GET /api/users/:id
-router.get('/:id', getUserById);
-
-// PUT /api/users/:id
-router.put('/:id', updateUserById);
-
-// DELETE /api/users/:id
-router.delete('/:id', deleteUserById);
+router.get('/me', getMe);
+router.put('/update-profile', updateProfile);
+router.put('/change-password', changePassword);
+router.delete('/delete', deleteUser);
 
 export default router;
