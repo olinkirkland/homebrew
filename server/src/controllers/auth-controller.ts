@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import * as authService from '../services/authService';
 import { StatusCodes } from 'http-status-codes';
+import * as authService from '../services/auth-service';
 
 /**
  * Registers a new user.
@@ -8,10 +8,10 @@ import { StatusCodes } from 'http-status-codes';
  * @param {Response} res - The response object.
  */
 export async function register(req: Request, res: Response) {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
 
     try {
-        const result = await authService.register(username, password);
+        const result = await authService.register(username, email, password);
         if (result.success) {
             res.status(StatusCodes.CREATED).json(result);
         } else {
@@ -31,10 +31,10 @@ export async function register(req: Request, res: Response) {
  * @param {Response} res - The response object.
  */
 export async function login(req: Request, res: Response) {
-    const { username, password } = req.body;
+    const { identifier, password } = req.body;
 
     try {
-        const result = await authService.login(username, password);
+        const result = await authService.login(identifier, password);
         if (result.success) {
             res.status(StatusCodes.OK).json(result);
         } else {

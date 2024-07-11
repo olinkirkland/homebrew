@@ -15,8 +15,8 @@ const transports: winston.transport[] = [
             winston.format.printf(
                 (info) => `${info.timestamp} ${info.level}: ${info.message}`
             )
-        ),
-    }),
+        )
+    })
 ];
 
 if (LOGTAIL_TOKEN) {
@@ -27,5 +27,5 @@ if (LOGTAIL_TOKEN) {
 export const logger = createLogger({
     level: 'info',
     format: winston.format.json(),
-    transports: transports,
+    transports: transports
 });

@@ -7,7 +7,7 @@ import {
     resendVerification,
     forgotPassword,
     resetPassword,
-} from '../controllers/authController';
+} from '../controllers/auth-controller';
 
 const router = Router();
 

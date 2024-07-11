@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { logger } from '../utils/logger';
 
 export async function connectToDatabase() {
+    logger.info('Connecting to MongoDB');
     dotenv.config();
     const { DB_URI } = process.env;
 
@@ -12,5 +13,5 @@ export async function connectToDatabase() {
         );
 
     await mongoose.connect(DB_URI);
-    logger.info('MongoDB connected successfully', { address: DB_URI });
+    logger.info('MongoDB connected', { address: DB_URI });
 }
