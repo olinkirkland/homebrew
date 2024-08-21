@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import Blacklist from '../models/Blacklist';
 import User from '../models/User';
 import { logger } from '../utils/logger';
+import { validateEmail, validateUsername } from './validation';
 
 /**
  * Registers a new user.
@@ -19,6 +20,17 @@ export async function register(
     try {
         if (!username || !email || !password) {
             return { success: false, message: 'All fields are required' };
+        }
+
+        if (!validateUsername(username)) {
+            return {
+                success: false,
+                message: 'Invalid username.'
+            };
+        }
+
+        if (!validateEmail(email)) {
+            return { success: false, message: 'Invalid email' };
         }
 
         // Check if the username is already taken
@@ -65,10 +77,13 @@ export async function login(
     password: string
 ): Promise<{ success: boolean; message?: string; token?: string }> {
     try {
+        console.log('User logging in', { identifier });
+
         // Check if the user exists
         const user = await User.findOne({
             $or: [{ username: identifier }, { email: identifier }]
         });
+
         if (!user) {
             return { success: false, message: 'User not found' };
         }
@@ -153,20 +168,84 @@ export async function resendVerification(
 export async function forgotPassword(
     email: string
 ): Promise<{ success: boolean; message?: string }> {
-    /* ... */
-    return { success: false, message: 'Not implemented' };
+    if (!email) return { success: false, message: 'Email is required' };
+
+    try {
+        // Check if the user exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return { success: false, message: 'User not found' };
+        }
+
+        // Generate a password reset token
+        const resetPasswordToken = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET!,
+            { expiresIn: '1h' }
+        );
+
+        // Save the token to the user's document
+        user.resetPasswordToken = resetPasswordToken;
+        await user.save();
+
+        // Send the password reset email
+        // TODO
+        // sendPasswordResetEmail(user.email, resetPasswordToken);
+        logger.info('Password reset link sent', { email, resetPasswordToken });
+    } catch (error) {
+        console.error('Error sending password reset link:', error);
+        return {
+            success: false,
+            message: 'An error occurred while sending the password reset link'
+        };
+    }
+
+    return { success: true, message: 'Password reset link sent' };
 }
 
 /**
  * Resets a user's password using a token.
- * @param {string} token - The password reset token.
+ * @param {string} resetPasswordToken - The password reset token.
  * @param {string} newPassword - The new password for the user.
  * @returns {Promise<{ success: boolean, message?: string }>} - A promise that resolves to an object indicating success or failure.
  */
 export async function resetPassword(
-    token: string,
+    resetPasswordToken: string,
     newPassword: string
 ): Promise<{ success: boolean; message?: string }> {
-    /* ... */
-    return { success: false, message: 'Not implemented' };
+    if (!resetPasswordToken || !newPassword) {
+        return {
+            success: false,
+            message: 'Token and new password are required'
+        };
+    }
+
+    try {
+        // Find the user by the reset token
+        const user = await User.findOne({
+            resetPasswordToken
+        });
+
+        if (!user || user.resetPasswordExpires < new Date()) {
+            return { success: false, message: 'Invalid or expired token' };
+        }
+
+        // Update the user's password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        await user.save();
+
+        logger.info('Password reset', {
+            email: user.email,
+            resetPasswordToken
+        });
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        return {
+            success: false,
+            message: 'An error occurred while resetting the password'
+        };
+    }
+
+    return { success: true, message: 'Password reset successful' };
 }

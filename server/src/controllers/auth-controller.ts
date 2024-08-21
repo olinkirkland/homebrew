@@ -54,12 +54,11 @@ export async function login(req: Request, res: Response) {
  * @param {Response} res - The response object.
  */
 export function logout(req: Request, res: Response) {
-    // Get the token from the request
     const token = req.headers.authorization;
     if (!token)
         return res.status(StatusCodes.UNAUTHORIZED).json({
             success: false,
-            message: 'No token provided'
+            message: 'Token is required'
         });
 
     try {
@@ -73,18 +72,59 @@ export function logout(req: Request, res: Response) {
     }
 }
 
+/**
+ * Sends a password reset email to the user.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ */
+export async function forgotPassword(req: Request, res: Response) {
+    const { email } = req.body;
+
+    try {
+        const result = await authService.forgotPassword(email);
+        if (result.success) {
+            res.status(StatusCodes.OK).json(result);
+        } else {
+            res.status(StatusCodes.UNAUTHORIZED).json(result);
+        }
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
+}
+
+/**
+ * Resets a user's password.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ */
+export async function resetPassword(req: Request, res: Response) {
+    const { resetPasswordToken, newPassword } = req.body;
+
+    try {
+        const result = await authService.resetPassword(
+            resetPasswordToken,
+            newPassword
+        );
+        if (result.success) {
+            res.status(StatusCodes.OK).json(result);
+        } else {
+            res.status(StatusCodes.UNAUTHORIZED).json(result);
+        }
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
+}
+
 export function verifyEmail(req: Request, res: Response) {
     /* ... */
 }
 
 export function resendVerification(req: Request, res: Response) {
-    /* ... */
-}
-
-export function forgotPassword(req: Request, res: Response) {
-    /* ... */
-}
-
-export function resetPassword(req: Request, res: Response) {
     /* ... */
 }

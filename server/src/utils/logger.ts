@@ -13,7 +13,7 @@ const transports: winston.transport[] = [
             winston.format.colorize(),
             winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
             winston.format.printf(
-                (info) => `${info.timestamp} ${info.level}: ${info.message}`
+                (info) => `${info.timestamp} [${info.level}] ${info.message}`
             )
         )
     })
@@ -25,7 +25,7 @@ if (LOGTAIL_TOKEN) {
 }
 
 export const logger = createLogger({
-    level: 'info',
+    level: 'silly',
     format: winston.format.json(),
     transports: transports
 });

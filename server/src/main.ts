@@ -1,13 +1,16 @@
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 import express from 'express';
 import { connectToDatabase } from './config/database';
 import { routes } from './config/routes';
-import { startScheduledJobs } from './config/schedule';
-import { logger } from './utils/logger';
+import { startScheduledTasks } from './config/schedule';
+import { logRequest } from './middleware/request-logging-middleware';
 import User from './models/User';
-import { verifyEmail } from './services/auth-service';
+import { logger } from './utils/logger';
 
-const app = express();
+dotenv.config();
+
+export const app = express();
 const port = process.env.PORT || 3000;
 
 async function startServer() {
@@ -19,11 +22,14 @@ async function startServer() {
     }
 
     try {
-        await startScheduledJobs();
+        await startScheduledTasks();
     } catch (error) {
         logger.error('Error starting scheduled jobs', { error });
         process.exit(1);
     }
+
+    // Delete all users
+    // await User.deleteMany({});
 
     const usersToPrint = await User.find().sort({ createdAt: -1 }).limit(10);
     console.table(
@@ -32,10 +38,11 @@ async function startServer() {
                 username: user.username,
                 email: user.email,
                 password: user.password.substring(0, 6) + '...',
-                createdAt: new Date(user.createdAt).toLocaleString(),
-                updatedAt: new Date(user.updatedAt).toLocaleString(),
                 verifyEmailToken: user.verifyEmailToken,
-                resetPasswordToken: user.resetPasswordToken
+                resetPasswordToken: user.resetPasswordToken,
+                resetPasswordExpires: user.resetPasswordExpires
+                    ? user.resetPasswordExpires.toISOString()
+                    : null
             };
         })
     );
@@ -43,13 +50,14 @@ async function startServer() {
     // Middleware
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(logRequest);
 
     // Routes
     app.use('/api', routes); // Assuming all routes are prefixed with '/api'
 
     // Start the server
     app.listen(port, () => {
-        logger.info('Server is running', { port });
+        logger.info(`Server is running on port ${port}`, { port });
     });
 }
 

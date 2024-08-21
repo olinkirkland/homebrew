@@ -3,8 +3,8 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "testuser_4",
-  "email": "foo4@bar.com",
+  "username": "testuser_5",
+  "email": "foo5@bar.com",
   "password": "testpassword"
 }
 
@@ -13,10 +13,27 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "testuser",
+  "identifier": "testuser_5",
   "password": "testpassword"
 }
 
-### Logout (if applicable)
+### Logout
 POST http://localhost:3000/api/auth/logout
 Authorization: Bearer <YOUR_JWT_TOKEN>
+
+### Forgot password
+POST http://localhost:3000/api/auth/forgot-password
+Content-Type: application/json
+
+{
+  "username": "testuser"
+}
+
+### Reset password
+POST http://localhost:3000/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "resetPasswordToken": "asdf",
+  "password": "newpassword
+}

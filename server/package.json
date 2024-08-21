@@ -4,13 +4,10 @@
     "keywords": [],
     "license": "ISC",
     "scripts": {
-        "dev": "nodemon --exec ts-node src/main.ts"
+        "dev": "nodemon --exec ts-node src/main.ts",
+        "test": "mocha -r ts-node/register tests/**/*.ts"
     },
     "dependencies": {
-        "@logtail/node": "^0.4.21",
-        "@logtail/winston": "^0.4.21",
-        "@types/bcrypt": "^5.0.2",
-        "@types/node-cron": "^3.0.11",
         "bcrypt": "^5.1.1",
         "bcryptjs": "^2.4.3",
         "dotenv": "^16.4.5",
@@ -22,15 +19,23 @@
         "winston": "^3.13.0"
     },
     "devDependencies": {
+        "@logtail/node": "^0.4.21",
+        "@logtail/winston": "^0.4.21",
+        "@types/bcrypt": "^5.0.2",
         "@types/bcryptjs": "^2.4.6",
         "@types/dotenv": "^8.2.0",
         "@types/express": "^4.17.21",
         "@types/jsonwebtoken": "^9.0.6",
+        "@types/mocha": "^10.0.7",
         "@types/mongoose": "^5.11.97",
-        "@types/node": "^20.14.10",
+        "@types/node": "^20.16.1",
+        "@types/node-cron": "^3.0.11",
+        "@types/supertest": "^6.0.2",
+        "mocha": "^10.7.3",
         "nodemon": "^3.1.4",
         "prettier": "^3.3.2",
+        "supertest": "^7.0.0",
         "ts-node": "^10.9.2",
-        "typescript": "^5.5.3"
+        "typescript": "^5.5.4"
     }
 }
