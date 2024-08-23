@@ -2,13 +2,15 @@ import assert from 'assert';
 import { StatusCodes } from 'http-status-codes';
 import { describe, it } from 'mocha';
 import request from 'supertest';
+import { makeReadableToken } from '../src/utils/helpers';
 
 describe('Auth API', () => {
     const server = 'http://localhost:3000/api';
+    const n = Math.floor(Math.random() * 100);
     const user = {
-        username: 'testuser99',
-        email: 'testuser99@gmail.com',
-        password: 'testpassword'
+        username: 'testuser' + n,
+        email: `testuser${n}@test.com`,
+        password: makeReadableToken()
     };
 
     console.table(user);
@@ -25,7 +27,11 @@ describe('Auth API', () => {
             .post('/auth/register')
             .send({ username: user.username, password: user.password });
 
-        assert.strictEqual(response.status, StatusCodes.OK, response.body.message);
+        assert.strictEqual(
+            response.status,
+            StatusCodes.OK,
+            response.body.message
+        );
         assert.strictEqual(typeof response.body, 'object');
         assert.ok(response.body.message.includes('registered'));
     });

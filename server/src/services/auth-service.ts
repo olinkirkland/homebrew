@@ -7,37 +7,22 @@ import { validateEmail, validateUsername } from './validation';
 
 /**
  * Registers a new user.
- * @param {string} username - The username of the new user.
  * @param {string} email - The email of the new user.
  * @param {string} password - The password of the new user.
  * @returns {Promise<{ success: boolean, message?: string }>} - A promise that resolves to an object indicating success or failure.
  */
 export async function register(
-    username: string,
     email: string,
     password: string
 ): Promise<{ success: boolean; message?: string }> {
     try {
-        if (!(username || email) || !password) {
+        if (!email || !password) {
             return { success: false, message: 'All fields are required' };
-        }
-
-        if (!validateUsername(username)) {
-            return {
-                success: false,
-                message: 'Invalid username.'
-            };
         }
 
         if (!validateEmail(email)) {
             logger.warn('Invalid email', { email });
             return { success: false, message: 'Invalid email' };
-        }
-
-        // Check if the username is already taken
-        const existingUsername = await User.findOne({ username });
-        if (existingUsername) {
-            return { success: false, message: 'Username already taken' };
         }
 
         // Check if the email is already taken
@@ -50,12 +35,12 @@ export async function register(
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create a new user
-        const newUser = new User({ username, email, password: hashedPassword });
+        const newUser = new User({ email, password: hashedPassword });
 
         // Save the user to the database
         await newUser.save();
 
-        logger.info('User registered', { username, email });
+        logger.info('User registered', { email });
 
         return { success: true, message: 'User registered successfully' };
     } catch (error) {

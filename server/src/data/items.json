@@ -1,0 +1,32 @@
+[
+    {
+        "id": "8bc57452-05eb-4877-9f5d-1167079b1bc1",
+        "slug": "avatar-mask",
+        "name": "Mardi Gras Mask"
+    },
+    {
+        "id": "d79ffa92-4287-4f08-b804-1879c084344a",
+        "slug": "avatar-day-of-the-dead",
+        "name": "Day of the Dead"
+    },
+    {
+        "id": "1680d862-70ed-4933-aef5-70e257e2242d",
+        "slug": "avatar-symbol-balance",
+        "name": "Symbol of Balance"
+    },
+    {
+        "id": "edd559a9-0502-41ba-9242-457c905ae29e",
+        "slug": "avatar-symbol-courage",
+        "name": "Symbol of Courage"
+    },
+    {
+        "id": "5f9582d5-6338-4542-8557-65e6f81d3eb0",
+        "slug": "avatar-symbol-zen",
+        "name": "Symbol of Zen"
+    },
+    {
+        "id": "3a9651a6-6b7c-41e8-bebf-e15e12ffd8a8",
+        "slug": "avatar-croissant",
+        "name": "Croissant"
+    }
+]

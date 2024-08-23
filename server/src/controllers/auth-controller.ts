@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import * as authService from '../services/auth-service';
 
 /**
- * Registers a new user.
+ * Registers a new guest user.
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
@@ -11,7 +11,7 @@ export async function register(req: Request, res: Response) {
     const { username, email, password } = req.body;
 
     try {
-        const result = await authService.register(username, email, password);
+        const result = await authService.register(email, password);
         if (result.success) {
             res.status(StatusCodes.CREATED).json(result);
         } else {
