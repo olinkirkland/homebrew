@@ -3,5 +3,5 @@ export function validateUsername(username: string): boolean {
 }
 
 export function validateEmail(email: string): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
 }

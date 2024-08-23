@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
 import { logger } from '../utils/logger';
 
 /**
@@ -13,9 +12,6 @@ export async function logRequest(
     res: Response,
     next: NextFunction
 ) {
-    logger.silly(
-        `${req.method} ${req.originalUrl}` +
-            (req.body ? ` - ${JSON.stringify(req.body)}` : '')
-    );
+    logger.silly(`${req.method} ${req.originalUrl}`, { ...req.body });
     next();
 }

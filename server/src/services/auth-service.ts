@@ -18,7 +18,7 @@ export async function register(
     password: string
 ): Promise<{ success: boolean; message?: string }> {
     try {
-        if (!username || !email || !password) {
+        if (!(username || email) || !password) {
             return { success: false, message: 'All fields are required' };
         }
 
@@ -30,6 +30,7 @@ export async function register(
         }
 
         if (!validateEmail(email)) {
+            logger.warn('Invalid email', { email });
             return { success: false, message: 'Invalid email' };
         }
 
@@ -77,7 +78,7 @@ export async function login(
     password: string
 ): Promise<{ success: boolean; message?: string; token?: string }> {
     try {
-        console.log('User logging in', { identifier });
+        logger.info('User logging in', { identifier });
 
         // Check if the user exists
         const user = await User.findOne({
