@@ -6,6 +6,49 @@ import { logger } from '../utils/logger';
 import { validateEmail, validateUsername } from './validation';
 
 /**
+ * Logs in a user.
+ * @param {string} identifier - The username or email of the user.
+ * @param {string} password - The password of the user.
+ * @returns {Promise<{ success: boolean, message?: string, token?: string }>} - A promise that resolves to an object indicating success or failure and a JWT token if successful.
+ */
+export async function login(
+    identifier: string,
+    password: string
+): Promise<{ success: boolean; message?: string; token?: string }> {
+    try {
+        logger.info('User logging in', { identifier });
+
+        // Check if the user exists
+        const user = await User.findOne({
+            $or: [{ username: identifier }, { email: identifier }]
+        });
+
+        if (!user) {
+            return { success: false, message: 'User not found' };
+        }
+
+        // Verify the password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return { success: false, message: 'Invalid password' };
+        }
+
+        // Generate a JWT token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
+            expiresIn: '1h'
+        });
+
+        return { success: true, message: 'Login successful', token };
+    } catch (error) {
+        console.error('Error logging in user:', error);
+        return {
+            success: false,
+            message: 'An error occurred while logging in'
+        };
+    }
+}
+
+/**
  * Registers a new user.
  * @param {string} email - The email of the new user.
  * @param {string} password - The password of the new user.
@@ -48,49 +91,6 @@ export async function register(
         return {
             success: false,
             message: 'An error occurred while registering the user'
-        };
-    }
-}
-
-/**
- * Logs in a user.
- * @param {string} identifier - The username or email of the user.
- * @param {string} password - The password of the user.
- * @returns {Promise<{ success: boolean, message?: string, token?: string }>} - A promise that resolves to an object indicating success or failure and a JWT token if successful.
- */
-export async function login(
-    identifier: string,
-    password: string
-): Promise<{ success: boolean; message?: string; token?: string }> {
-    try {
-        logger.info('User logging in', { identifier });
-
-        // Check if the user exists
-        const user = await User.findOne({
-            $or: [{ username: identifier }, { email: identifier }]
-        });
-
-        if (!user) {
-            return { success: false, message: 'User not found' };
-        }
-
-        // Verify the password
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return { success: false, message: 'Invalid password' };
-        }
-
-        // Generate a JWT token
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
-            expiresIn: '1h'
-        });
-
-        return { success: true, message: 'Login successful', token };
-    } catch (error) {
-        console.error('Error logging in user:', error);
-        return {
-            success: false,
-            message: 'An error occurred while logging in'
         };
     }
 }

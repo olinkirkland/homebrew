@@ -2,10 +2,10 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import express from 'express';
 import { connectToDatabase } from './config/database';
-import { routes } from './config/routes';
 import { startScheduledTasks } from './config/schedule';
 import { logRequest } from './middleware/request-logging-middleware';
 import User from './models/User';
+import { routes } from './routes/routes';
 import { logger } from './utils/logger';
 
 dotenv.config();
@@ -27,9 +27,6 @@ async function startServer() {
         logger.error('Error starting scheduled jobs', { error });
         process.exit(1);
     }
-
-    // Delete all users
-    // await User.deleteMany({});
 
     const usersToPrint = await User.find().sort({ createdAt: -1 }).limit(10);
     console.table(

@@ -17,6 +17,13 @@ Content-Type: application/json
   "password": "testpassword"
 }
 
+### Login with no identifier or password
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+}
+
 ### Logout
 POST http://localhost:3000/api/auth/logout
 Authorization: Bearer <YOUR_JWT_TOKEN>

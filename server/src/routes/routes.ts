@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import authRoutes from '../routes/auth-routes';
-import userRoutes from '../routes/user-routes';
+import authRoutes from './auth-routes';
+import userRoutes from './user-routes';
 
 const router = Router();
 

@@ -1,12 +1,4 @@
-import { IUser } from '../models/User';
-
-/**
- * Fetches all users from the database.
- * @returns {Promise<IUser[]>} - A promise that resolves to an array of users.
- */
-export async function getAllUsers(): Promise<IUser[]> {
-    /* ... */
-}
+import User, { IUser } from '../models/User';
 
 /**
  * Fetches a user by their ID.
@@ -15,6 +7,7 @@ export async function getAllUsers(): Promise<IUser[]> {
  */
 export async function getUserById(id: string): Promise<IUser | null> {
     /* ... */
+    return null;
 }
 
 /**
@@ -28,6 +21,7 @@ export async function updateUserById(
     username: string
 ): Promise<IUser | null> {
     /* ... */
+    return null;
 }
 
 /**
@@ -52,6 +46,7 @@ export async function updateProfile(
     email: string
 ): Promise<IUser | null> {
     /* ... */
+    return null;
 }
 
 /**

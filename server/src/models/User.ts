@@ -23,8 +23,8 @@ const userSchema = new Schema(
     {
         isGuest: { type: Boolean, default: true },
         username: { type: String, required: true },
-        password: { type: String, required: true },
-        email: { type: String, required: true, unique: true },
+        password: { type: String, required: false },
+        email: { type: String, required: false, unique: false },
         isEmailVerified: { type: Boolean, default: false },
         verifyEmailToken: { type: String, default: null },
         resetPasswordToken: { type: String, default: null },
@@ -45,10 +45,10 @@ userSchema.virtual('id').get(function (this: IUser) {
 export function makeGuestUser(): Partial<IUser> {
     return {
         isGuest: true,
+        username: 'Guest_' + (1000 + Math.floor(Math.random() * 8999)),
+        password: makeReadableToken(),
         isEmailVerified: false,
         verifyEmailToken: makeReadableToken(),
-        resetPasswordToken: makeReadableToken(),
-        resetPasswordExpires: new Date(),
         profilePicture: 'anon'
     };
 }

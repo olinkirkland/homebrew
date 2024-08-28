@@ -1,21 +1,34 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import User, { makeGuestUser } from '../models/User';
 import * as authService from '../services/auth-service';
+import { hashSync } from 'bcrypt';
 
 /**
- * Registers a new guest user.
+ * Logs in a user.
+ * If there's no email/username provided, a new guest user is created and logged in.
+ * A token is returned in the response if the login is successful.
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
-export async function register(req: Request, res: Response) {
-    const { username, email, password } = req.body;
+export async function login(req: Request, res: Response) {
+    // If there's no identifier, create a new guest user
+    if (!req.body.identifier) {
+        const guestUser = makeGuestUser();
+        req.body.identifier = guestUser.username;
+        req.body.password = guestUser.password;
+        guestUser.password = hashSync(guestUser.password!, 10);
+        await User.create(guestUser);
+    }
+
+    const { identifier, password } = req.body;
 
     try {
-        const result = await authService.register(email, password);
+        const result = await authService.login(identifier, password);
         if (result.success) {
-            res.status(StatusCodes.CREATED).json(result);
+            res.status(StatusCodes.OK).json(result);
         } else {
-            res.status(StatusCodes.BAD_REQUEST).json(result);
+            res.status(StatusCodes.UNAUTHORIZED).json(result);
         }
     } catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -26,19 +39,19 @@ export async function register(req: Request, res: Response) {
 }
 
 /**
- * Logs in a user.
+ * Registers a current user with a provided email and password.
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
-export async function login(req: Request, res: Response) {
-    const { identifier, password } = req.body;
+export async function register(req: Request, res: Response) {
+    const { email, password } = req.body;
 
     try {
-        const result = await authService.login(identifier, password);
+        const result = await authService.register(email, password);
         if (result.success) {
-            res.status(StatusCodes.OK).json(result);
+            res.status(StatusCodes.CREATED).json(result);
         } else {
-            res.status(StatusCodes.UNAUTHORIZED).json(result);
+            res.status(StatusCodes.BAD_REQUEST).json(result);
         }
     } catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

@@ -13,5 +13,8 @@ export async function connectToDatabase() {
         );
 
     await mongoose.connect(DB_URI);
+    // await mongoose.connection.collection('users').deleteMany({});
+    // await mongoose.connection.collection('users').dropIndex('email_1');
+
     logger.info('MongoDB connected', { address: DB_URI });
 }
