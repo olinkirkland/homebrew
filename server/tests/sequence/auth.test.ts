@@ -1,11 +1,13 @@
 import assert from 'assert';
+import dotenv from 'dotenv';
 import { StatusCodes } from 'http-status-codes';
 import { describe, it } from 'mocha';
 import request from 'supertest';
 import { makeReadableToken } from '../../src/utils/helpers';
 
 describe('Auth API', () => {
-    const server = 'http://localhost:3000/api';
+    dotenv.config();
+    const server = process.env.TEST_SERVER_URL || 'http://localhost:3000/api';
 
     const user = getNewRandomUser();
 
