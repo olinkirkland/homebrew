@@ -1,10 +1,7 @@
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
-import dotenv from 'dotenv';
 import winston, { createLogger } from 'winston';
-
-dotenv.config();
-const { LOGTAIL_TOKEN } = process.env;
+import { LOGTAIL_TOKEN } from './config';
 
 // Define a format to print metadata in a gray color with indentation
 const formatWithMetadata = winston.format.printf(

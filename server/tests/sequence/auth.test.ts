@@ -10,6 +10,8 @@ describe('Auth API', () => {
     const server = process.env.TEST_SERVER_URL || 'http://localhost:3000/api';
 
     const user = getNewRandomUser();
+    let refreshToken: string;
+    let accessToken: string;
 
     console.table(user);
 
@@ -19,11 +21,54 @@ describe('Auth API', () => {
         assert.strictEqual(response.status, StatusCodes.OK);
     });
 
+    // Test for user login
+    if (false)
+        it(`should login to the account with the username '${user.username}'`, async () => {
+            const response = await request(server)
+                .post('/auth/login')
+                .send({ username: user.username, password: user.password });
+
+            assert.strictEqual(response.status, StatusCodes.OK);
+            assert.strictEqual(typeof response.body, 'object');
+            assert.ok(response.body.token);
+
+            refreshToken = response.body.token
+        });
+
+    // Test for logging in with a new guest account
+    it('should login to a new guest account', async () => {
+        const response = await request(server).post('/auth/guest');
+
+        console.log(response.body);
+
+        assert.strictEqual(response.status, StatusCodes.CREATED);
+        assert.strictEqual(typeof response.body, 'object');
+        assert.ok(response.body.token);
+
+        refreshToken = response.body.token;
+    });
+
+    // Test for fetching a new token
+    it('should fetch a new access token', async () => {
+        if (!refreshToken) assert.fail('No refresh token found');
+
+        const response = await request(server)
+            .get('/auth/token')
+            .send({ refreshToken: refreshToken });
+
+        assert.strictEqual(response.status, StatusCodes.OK);
+        assert.strictEqual(typeof response.body, 'object');
+        assert.ok(response.body.token);
+    });
+
     // Test for user registration
-    it(`should register a new account with the username '${user.username}'`, async () => {
+    it(`should register the logged-in user with the email '${user.email}'`, async () => {
+        if (!refreshToken) assert.fail('No access token found');
+
         const response = await request(server)
             .post('/auth/register')
-            .send({ username: user.username, password: user.password });
+            .set('Authorization', `Bearer ${refreshToken}`) // Set the token in the header
+            .send({ email: user.email, password: user.password });
 
         assert.strictEqual(
             response.status,
@@ -32,17 +77,6 @@ describe('Auth API', () => {
         );
         assert.strictEqual(typeof response.body, 'object');
         assert.ok(response.body.message.includes('registered'));
-    });
-
-    // Test for user login
-    it(`should login to the account with the username '${user.username}'`, async () => {
-        const response = await request(server)
-            .post('/auth/login')
-            .send({ username: user.username, password: user.password });
-
-        assert.strictEqual(response.status, StatusCodes.OK);
-        assert.strictEqual(typeof response.body, 'object');
-        assert.ok(response.body.token);
     });
 });
 

@@ -1,9 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Blacklist from '../models/Blacklist';
-import User from '../models/User';
+import User, { IUser } from '../models/User';
 import { logger } from '../utils/logger';
 import { validateEmail, validateUsername } from './validation';
+import { REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from '../utils/config';
 
 /**
  * Logs in a user.
@@ -33,9 +34,9 @@ export async function login(
             return { success: false, message: 'Invalid password' };
         }
 
-        // Generate a JWT token
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
-            expiresIn: '1h'
+        // Generate a refresh token
+        const token = jwt.sign({ userId: user.id }, REFRESH_TOKEN_SECRET, {
+            expiresIn: REFRESH_TOKEN_EXPIRATION
         });
 
         return { success: true, message: 'Login successful', token };
@@ -55,12 +56,13 @@ export async function login(
  * @returns {Promise<{ success: boolean, message?: string }>} - A promise that resolves to an object indicating success or failure.
  */
 export async function register(
+    user: IUser,
     email: string,
     password: string
 ): Promise<{ success: boolean; message?: string }> {
     try {
         if (!email || !password) {
-            return { success: false, message: 'All fields are required' };
+            return { success: false, message: 'Require an email and password' };
         }
 
         if (!validateEmail(email)) {
@@ -71,20 +73,19 @@ export async function register(
         // Check if the email is already taken
         const existingEmail = await User.findOne({ email });
         if (existingEmail) {
+            logger.warn('Email already taken', { email });
             return { success: false, message: 'Email already taken' };
         }
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create a new user
-        const newUser = new User({ email, password: hashedPassword });
-
-        // Save the user to the database
-        await newUser.save();
+        // Update and save the user document
+        user.email = email;
+        user.password = hashedPassword;
+        await user.save();
 
         logger.info('User registered', { email });
-
         return { success: true, message: 'User registered successfully' };
     } catch (error) {
         console.error('Error registering user:', error);
@@ -96,7 +97,7 @@ export async function register(
 }
 
 /**
- * Logs out a user by invalidating their token.
+ * Logs out a user by invalidating their p.
  * @param {string} token - The token of the user to log out.
  * @returns {Promise<void>} - A promise that resolves when the user is logged out.
  */

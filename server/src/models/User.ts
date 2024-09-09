@@ -1,3 +1,4 @@
+import { hashSync } from 'bcrypt';
 import mongoose, { Document, Schema } from 'mongoose';
 import { makeReadableToken } from '../utils/helpers';
 
@@ -32,7 +33,9 @@ const userSchema = new Schema(
         profilePicture: { type: String, default: null }
     },
     {
-        timestamps: true
+        timestamps: true,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
     }
 );
 
@@ -42,15 +45,33 @@ userSchema.virtual('id').get(function (this: IUser) {
 });
 
 // Helper function to create a default guest user object
-export function makeGuestUser(): Partial<IUser> {
-    return {
+export async function makeGuestUser(): Promise<IUser> {
+    const username = await getNextAvailableGuestUsername();
+    console.log('Creating guest user:', username);
+
+    const data = {
         isGuest: true,
-        username: 'Guest_' + (1000 + Math.floor(Math.random() * 8999)),
-        password: makeReadableToken(),
+        username,
+        password: hashSync(makeReadableToken(), 10),
         isEmailVerified: false,
         verifyEmailToken: makeReadableToken(),
         profilePicture: 'anon'
-    };
+    }
+
+    const guestUser = await User.create(data);
+    return guestUser;
+}
+
+async function getNextAvailableGuestUsername(): Promise<string> {
+    let username;
+    let isUsernameTaken = true;
+    while (isUsernameTaken) {
+        username = 'Guest_' + (1000 + Math.floor(Math.random() * 8999));
+        isUsernameTaken = !!(await User.findOne({ username }));
+        if (isUsernameTaken) console.log('Checking username:', username, isUsernameTaken);
+    }
+
+    return username!;
 }
 
 // Create and export User model

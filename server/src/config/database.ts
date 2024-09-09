@@ -1,11 +1,9 @@
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { logger } from '../utils/logger';
+import { DB_URI } from '../utils/config';
 
 export async function connectToDatabase() {
     logger.info('Connecting to MongoDB');
-    dotenv.config();
-    const { DB_URI } = process.env;
 
     if (!DB_URI)
         throw new Error(

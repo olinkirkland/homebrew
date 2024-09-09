@@ -1,5 +1,4 @@
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import express from 'express';
 import { connectToDatabase } from './config/database';
 import { startScheduledTasks } from './config/schedule';
@@ -7,11 +6,10 @@ import { logRequest } from './middleware/request-logging-middleware';
 import User from './models/User';
 import { routes } from './routes/routes';
 import { logger } from './utils/logger';
-
-dotenv.config();
+import { PORT } from './utils/config';
 
 export const app = express();
-const port = process.env.PORT || 3000;
+const port = PORT || 3000;
 
 async function startServer() {
     try {

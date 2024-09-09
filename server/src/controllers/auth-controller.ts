@@ -1,8 +1,33 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import User, { makeGuestUser } from '../models/User';
+import jwt from 'jsonwebtoken';
+import { makeGuestUser } from '../models/User';
 import * as authService from '../services/auth-service';
-import { hashSync } from 'bcrypt';
+import { REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from '../utils/config';
+import { verifyRefreshToken } from '../utils/token-util';
+
+/**
+ * Creates a new guest user.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ */
+export async function createNewGuest(req: Request, res: Response) {
+    const guestUser = await makeGuestUser();
+
+    try {
+        const token = jwt.sign({ userId: guestUser.id }, REFRESH_TOKEN_SECRET, {
+            expiresIn: REFRESH_TOKEN_EXPIRATION
+        });
+
+        res.status(StatusCodes.CREATED).json({ success: true, token });
+    } catch (error) {
+        console.error(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
+}
 
 /**
  * Logs in a user.
@@ -12,16 +37,13 @@ import { hashSync } from 'bcrypt';
  * @param {Response} res - The response object.
  */
 export async function login(req: Request, res: Response) {
-    // If there's no identifier, create a new guest user
-    if (!req.body.identifier) {
-        const guestUser = makeGuestUser();
-        req.body.identifier = guestUser.username;
-        req.body.password = guestUser.password;
-        guestUser.password = hashSync(guestUser.password!, 10);
-        await User.create(guestUser);
-    }
-
     const { identifier, password } = req.body;
+    if (!identifier || !password) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            success: false,
+            message: 'Email/username and password are required'
+        });
+    }
 
     try {
         const result = await authService.login(identifier, password);
@@ -39,15 +61,42 @@ export async function login(req: Request, res: Response) {
 }
 
 /**
- * Registers a current user with a provided email and password.
+ * Fetches a new token for the user.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ */
+export async function fetchToken(req: Request, res: Response) {
+    const refreshToken = req.body.refreshToken;
+    if (!refreshToken) {
+        res.status(StatusCodes.UNAUTHORIZED).json({
+            success: false, message: 'No refresh token provided'
+        });
+    }
+
+    try {
+        const result = await verifyRefreshToken(refreshToken);
+        if (!result)
+            return res.status(StatusCodes.UNAUTHORIZED).json(result);
+
+        res.status(StatusCodes.OK).json({ success: true, token: result });
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
+}
+
+/**
+ * Registers a logged-in user with a provided email and password.
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
 export async function register(req: Request, res: Response) {
-    const { email, password } = req.body;
+    const { user, email, password } = req.body;
 
     try {
-        const result = await authService.register(email, password);
+        const result = await authService.register(user, email, password);
         if (result.success) {
             res.status(StatusCodes.CREATED).json(result);
         } else {
