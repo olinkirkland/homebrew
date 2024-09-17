@@ -47,7 +47,6 @@ userSchema.virtual('id').get(function (this: IUser) {
 // Helper function to create a default guest user object
 export async function makeGuestUser(): Promise<IUser> {
     const username = await getNextAvailableGuestUsername();
-    console.log('Creating guest user:', username);
 
     const data = {
         isGuest: true,

@@ -2,9 +2,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Blacklist from '../models/Blacklist';
 import User, { IUser } from '../models/User';
-import { logger } from '../utils/logger';
-import { validateEmail, validateUsername } from './validation';
 import { REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from '../utils/config';
+import { logger } from '../utils/logger';
+import { validateEmail } from './validation';
 
 /**
  * Logs in a user.

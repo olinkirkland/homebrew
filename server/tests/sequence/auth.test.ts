@@ -39,8 +39,6 @@ describe('Auth API', () => {
     it('should login to a new guest account', async () => {
         const response = await request(server).post('/auth/guest');
 
-        console.log(response.body);
-
         assert.strictEqual(response.status, StatusCodes.CREATED);
         assert.strictEqual(typeof response.body, 'object');
         assert.ok(response.body.token);
@@ -59,15 +57,18 @@ describe('Auth API', () => {
         assert.strictEqual(response.status, StatusCodes.OK);
         assert.strictEqual(typeof response.body, 'object');
         assert.ok(response.body.token);
+        assert.ok(response.body.token !== refreshToken);
+
+        accessToken = response.body.token;
     });
 
     // Test for user registration
     it(`should register the logged-in user with the email '${user.email}'`, async () => {
-        if (!refreshToken) assert.fail('No access token found');
+        if (!accessToken) assert.fail('No access token found');
 
         const response = await request(server)
             .post('/auth/register')
-            .set('Authorization', `Bearer ${refreshToken}`) // Set the token in the header
+            .set('Authorization', `Bearer ${accessToken}`) // Set the token in the header
             .send({ email: user.email, password: user.password });
 
         assert.strictEqual(

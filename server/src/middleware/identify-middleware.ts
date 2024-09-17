@@ -8,10 +8,13 @@ export default async function identifyUser(req: any, res: any, next: any) {
     let user: IUser | null = null;
     try {
         user = await User.findOne({ _id: id });
-    } catch { }
+    } catch {
+        logger.error('Error identifying user', { id });
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+    }
 
     if (!user) {
-        logger.error('User not found', { userId: id });
+        logger.error('User not found', { id });
         return res.status(StatusCodes.NOT_FOUND).send();
     }
 

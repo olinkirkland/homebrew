@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
-import { makeGuestUser } from '../models/User';
+import { IUser, makeGuestUser } from '../models/User';
 import * as authService from '../services/auth-service';
 import { REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from '../utils/config';
-import { verifyRefreshToken } from '../utils/token-util';
+import { makeAccessToken, verifyRefreshToken } from '../utils/token-util';
 
 /**
  * Creates a new guest user.
@@ -15,7 +15,7 @@ export async function createNewGuest(req: Request, res: Response) {
     const guestUser = await makeGuestUser();
 
     try {
-        const token = jwt.sign({ userId: guestUser.id }, REFRESH_TOKEN_SECRET, {
+        const token = jwt.sign({ id: guestUser.id }, REFRESH_TOKEN_SECRET, {
             expiresIn: REFRESH_TOKEN_EXPIRATION
         });
 
@@ -77,8 +77,9 @@ export async function fetchToken(req: Request, res: Response) {
         const result = await verifyRefreshToken(refreshToken);
         if (!result)
             return res.status(StatusCodes.UNAUTHORIZED).json(result);
+        const accessToken = makeAccessToken(result.id);
 
-        res.status(StatusCodes.OK).json({ success: true, token: result });
+        res.status(StatusCodes.OK).json({ success: true, token: accessToken });
     } catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
@@ -93,12 +94,13 @@ export async function fetchToken(req: Request, res: Response) {
  * @param {Response} res - The response object.
  */
 export async function register(req: Request, res: Response) {
-    const { user, email, password } = req.body;
+    const { user } = req as Request & { user: IUser };
+    const { email, password } = req.body;
 
     try {
         const result = await authService.register(user, email, password);
         if (result.success) {
-            res.status(StatusCodes.CREATED).json(result);
+            res.status(StatusCodes.OK).json(result);
         } else {
             res.status(StatusCodes.BAD_REQUEST).json(result);
         }
