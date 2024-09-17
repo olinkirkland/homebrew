@@ -9,7 +9,7 @@ import { toRelativeDate } from '../utils/date-util';
 
 /**
  * Logs in a user.
- * @param {string} identifier - The username or email of the user.
+ * @param {string} identifier - The identifier (username or email) of the user.
  * @param {string} password - The password of the user.
  * @returns {Promise<{ success: boolean, message?: string, token?: string }>} - A promise that resolves to an object indicating success or failure and a JWT token if successful.
  */
@@ -62,6 +62,11 @@ export async function register(
     password: string
 ): Promise<{ success: boolean; message?: string }> {
     try {
+        // If the user is already registered, return an error
+        if (!user.isGuest) {
+            return { success: false, message: 'User is already registered' };
+        }
+
         if (!email || !password) {
             return { success: false, message: 'Require an email and password' };
         }
