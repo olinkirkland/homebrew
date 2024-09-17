@@ -66,6 +66,20 @@ describe('Auth API', () => {
         assert.ok(response.body.message.includes('registered'));
     });
 
+    // Test for invalid registration (should fail because uesr is already registered)
+    it(`should NOT register the logged-in user again`, async () => {
+        if (!accessToken) assert.fail('No access token found');
+        const u = getNewRandomUser();
+
+        const response = await request(server)
+            .post('/auth/register')
+            .set('Authorization', `Bearer ${accessToken}`) // Set the token in the header
+            .send({ email: u.email, password: u.password });
+
+        assert.strictEqual(response.status, StatusCodes.BAD_REQUEST);
+        assert.strictEqual(typeof response.body, 'object');
+    });
+
     // Test for user logout
     it('should logout the user', async () => {
         if (!accessToken) assert.fail('No access token found');
