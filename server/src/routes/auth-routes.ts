@@ -11,7 +11,7 @@ import {
     verifyEmail,
 } from '../controllers/auth-controller';
 import authenticate from '../middleware/auth-middleware';
-import identifyUser from '../middleware/identify-middleware';
+import identifyUser from '../middleware/identify-user-middleware';
 
 const router = Router();
 

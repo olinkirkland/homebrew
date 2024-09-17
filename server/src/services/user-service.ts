@@ -7,22 +7,18 @@ import { logger } from '../utils/logger';
  * @returns {Promise<IUser | null>} - A promise that resolves to the user if found, otherwise null.
  */
 export async function getUserById(id: string): Promise<IUser | null> {
-    /* ... */
-    return null;
+    const user = await User.findById(id);
+    return user || null;
 }
 
 /**
- * Updates a user's username by their ID.
- * @param {string} id - The ID of the user to update.
- * @param {string} username - The new username for the user.
- * @returns {Promise<IUser | null>} - A promise that resolves to the updated user if found, otherwise null.
+ * Fetches multiple users by their IDs.
+ * @param {string[]} ids - An array of user IDs to fetch.
+ * @returns {Promise<IUser[]>} - A promise that resolves to an array of users.
  */
-export async function updateUserById(
-    id: string,
-    username: string
-): Promise<IUser | null> {
-    /* ... */
-    return null;
+export async function getUsersByIds(ids: string[]): Promise<IUser[]> {
+    const users = await User.find({ id: { $in: ids } });
+    return users;
 }
 
 /**
@@ -32,11 +28,11 @@ export async function updateUserById(
  */
 export async function deleteUser(user: IUser): Promise<{ success: boolean; message?: string }> {
     try {
-        await User.deleteOne({ _id: user._id });
-        logger.info('User deleted', { id: user._id });
+        await User.deleteOne({ id: user.id });
+        logger.info('User deleted', { id: user.id, username: user.username });
     }
     catch (error) {
-        logger.error('Error deleting user', { id: user._id, error });
+        logger.error('Error deleting user', { id: user.id, username: user.username, error });
         return {
             success: false,
             message: 'An error occurred while deleting the user'
@@ -47,32 +43,15 @@ export async function deleteUser(user: IUser): Promise<{ success: boolean; messa
 }
 
 /**
- * Updates a user's profile information.
+ * Updates a user's profile.
  * @param {string} id - The ID of the user to update.
- * @param {string} username - The new username for the user.
- * @param {string} email - The new email for the user.
+ * @param {Partial<IUser>} newProfile - The new profile data for the user.
  * @returns {Promise<IUser | null>} - A promise that resolves to the updated user if found, otherwise null.
  */
 export async function updateProfile(
     id: string,
-    username: string,
-    email: string
+    newProfile: Partial<IUser>
 ): Promise<IUser | null> {
     /* ... */
     return null;
-}
-
-/**
- * Changes a user's password.
- * @param {string} id - The ID of the user whose password is to be changed.
- * @param {string} oldPassword - The user's current password.
- * @param {string} newPassword - The new password for the user.
- * @returns {Promise<void>} - A promise that resolves when the password is changed.
- */
-export async function changePassword(
-    id: string,
-    oldPassword: string,
-    newPassword: string
-): Promise<void> {
-    /* ... */
 }

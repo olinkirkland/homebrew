@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import {
     deleteUser,
-    getMe,
+    getUser,
     updateProfile
 } from '../controllers/user-controller';
 
 const router = Router();
 
-router.get('/me', getMe);
+router.get('/user/:id', getUser);
 router.put('/update-profile', updateProfile);
 router.delete('/delete', deleteUser);
 

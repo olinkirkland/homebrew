@@ -26,6 +26,9 @@ async function startServer() {
         process.exit(1);
     }
 
+    // Delete all users
+    // await User.deleteMany({});
+
     const usersToPrint = await User.find().sort({ createdAt: -1 }).limit(10);
     console.table(
         usersToPrint.map((user) => {

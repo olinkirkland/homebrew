@@ -95,6 +95,16 @@ describe('Auth API', () => {
         assert.strictEqual(response.status, StatusCodes.OK);
         assert.strictEqual(typeof response.body, 'object');
     });
+
+    // Test to delete the user account
+    it('should delete the user account', async () => {
+        const response = await request(server)
+            .delete('/user/delete')
+            .set('Authorization', `Bearer ${accessToken}`);
+
+        assert.strictEqual(response.status, StatusCodes.OK);
+        assert.strictEqual(typeof response.body, 'object');
+    });
 });
 
 function getNewRandomUser() {
