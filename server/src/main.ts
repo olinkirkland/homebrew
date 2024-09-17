@@ -33,11 +33,7 @@ async function startServer() {
                 username: user.username,
                 email: user.email,
                 password: user.password.substring(0, 6) + '...',
-                verifyEmailToken: user.verifyEmailToken,
-                resetPasswordToken: user.resetPasswordToken,
-                resetPasswordExpires: user.resetPasswordExpires
-                    ? user.resetPasswordExpires.toISOString()
-                    : null
+                isGuest: user.isGuest
             };
         })
     );

@@ -21,20 +21,6 @@ describe('Auth API', () => {
         assert.strictEqual(response.status, StatusCodes.OK);
     });
 
-    // Test for user login
-    if (false)
-        it(`should login to the account with the username '${user.username}'`, async () => {
-            const response = await request(server)
-                .post('/auth/login')
-                .send({ username: user.username, password: user.password });
-
-            assert.strictEqual(response.status, StatusCodes.OK);
-            assert.strictEqual(typeof response.body, 'object');
-            assert.ok(response.body.token);
-
-            refreshToken = response.body.token
-        });
-
     // Test for logging in with a new guest account
     it('should login to a new guest account', async () => {
         const response = await request(server).post('/auth/guest');
@@ -78,6 +64,36 @@ describe('Auth API', () => {
         );
         assert.strictEqual(typeof response.body, 'object');
         assert.ok(response.body.message.includes('registered'));
+    });
+
+    // Test for user logout
+    it('should logout the user', async () => {
+        if (!accessToken) assert.fail('No access token found');
+
+        const response = await request(server)
+            .post('/auth/logout')
+            .set('Authorization', `Bearer ${accessToken}`);
+
+        assert.strictEqual(response.status, StatusCodes.OK);
+        assert.strictEqual(typeof response.body, 'object');
+    });
+
+    // Test for invalid registration (should fail)
+    it('should fail to register a user without a token', async () => {
+        const response = await request(server).post('/auth/register');
+
+        assert.strictEqual(response.status, StatusCodes.UNAUTHORIZED);
+        assert.strictEqual(typeof response.body, 'object');
+    });
+
+    // Test to login with the user and password
+    it('should login to the account with the email and password', async () => {
+        const response = await request(server)
+            .post('/auth/login')
+            .send({ identifier: user.email, password: user.password });
+
+        assert.strictEqual(response.status, StatusCodes.OK);
+        assert.strictEqual(typeof response.body, 'object');
     });
 });
 

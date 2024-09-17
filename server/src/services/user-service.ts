@@ -1,4 +1,5 @@
 import User, { IUser } from '../models/User';
+import { logger } from '../utils/logger';
 
 /**
  * Fetches a user by their ID.
@@ -25,12 +26,24 @@ export async function updateUserById(
 }
 
 /**
- * Deletes a user by their ID.
- * @param {string} id - The ID of the user to delete.
- * @returns {Promise<void>} - A promise that resolves when the user is deleted.
+ * Deletes a user.
+ * @param {IUser} user - The user to delete.
+ * @returns {Promise<{ success: boolean, message?: string }>} - A promise that resolves to an object indicating success or failure.
  */
-export async function deleteUserById(id: string): Promise<void> {
-    /* ... */
+export async function deleteUser(user: IUser): Promise<{ success: boolean; message?: string }> {
+    try {
+        await User.deleteOne({ _id: user._id });
+        logger.info('User deleted', { id: user._id });
+    }
+    catch (error) {
+        logger.error('Error deleting user', { id: user._id, error });
+        return {
+            success: false,
+            message: 'An error occurred while deleting the user'
+        };
+    }
+
+    return { success: true, message: 'User deleted' };
 }
 
 /**

@@ -118,12 +118,7 @@ export async function register(req: Request, res: Response) {
  * @param {Response} res - The response object.
  */
 export function logout(req: Request, res: Response) {
-    const token = req.headers.authorization;
-    if (!token)
-        return res.status(StatusCodes.UNAUTHORIZED).json({
-            success: false,
-            message: 'Token is required'
-        });
+    const { token } = req as Request & { token: string };
 
     try {
         authService.logout(token);

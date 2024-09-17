@@ -1,10 +1,11 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import Blacklist from '../models/Blacklist';
 import User, { IUser } from '../models/User';
 import { REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from '../utils/config';
 import { logger } from '../utils/logger';
 import { validateEmail } from './validation';
+import { toRelativeDate } from '../utils/date-util';
 
 /**
  * Logs in a user.
@@ -83,6 +84,8 @@ export async function register(
         // Update and save the user document
         user.email = email;
         user.password = hashedPassword;
+        user.isGuest = false;
+        // Todo: Set the email verification token
         await user.save();
 
         logger.info('User registered', { email });
@@ -99,23 +102,24 @@ export async function register(
 /**
  * Logs out a user by invalidating their p.
  * @param {string} token - The token of the user to log out.
- * @returns {Promise<void>} - A promise that resolves when the user is logged out.
+ * @returns {Promise<{ success: boolean, message?: string }>} - A promise that resolves to an object indicating success or failure.
  */
 export async function logout(
     token: string
 ): Promise<{ success: boolean; message?: string }> {
     try {
         // Decode the token to get the expiration time
-        const decodedToken: any = jwt.decode(token);
-        const expiresAt = new Date(decodedToken.exp * 1000);
+        const decodedToken: JwtPayload = jwt.decode(token) as JwtPayload;
+        const expiresAt = new Date(decodedToken.exp! * 1000);
+
+        logger.info('User logging out', { token, expiresAt: toRelativeDate(expiresAt) });
 
         // Add the token to the blacklist
         const blacklistEntry = new Blacklist({ token, expiresAt });
         await blacklistEntry.save();
-
         return { success: true, message: 'Logout successful' };
     } catch (error) {
-        console.error('Error logging out user:', error);
+        logger.error('Error logging out user:', error);
         return {
             success: false,
             message: 'An error occurred while logging out'

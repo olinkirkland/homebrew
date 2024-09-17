@@ -12,6 +12,8 @@ export default function authenticate(req: any, res: any, next: any) {
         return res.status(StatusCodes.UNAUTHORIZED).send();
     }
 
+    req.token = token;
+
     jwt.verify(token, ACCESS_TOKEN_SECRET, (err: any, data: any) => {
         if (err) {
             logger.warn('Failed to authenticate token', {

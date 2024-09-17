@@ -19,10 +19,10 @@ router.post('/guest', createNewGuest);
 router.post('/login', login);
 router.get('/token', fetchToken);
 router.post('/register', authenticate, identifyUser, register);
-router.post('/logout', logout);
-router.post('/forgot-password', forgotPassword);
-router.post('/reset-password', resetPassword);
-router.post('/verify-email', verifyEmail);
-router.post('/resend-verification', resendVerification);
+router.post('/logout', authenticate, logout);
+router.post('/forgot-password', forgotPassword); // todo
+router.post('/reset-password', resetPassword); // todo
+router.post('/verify-email', verifyEmail); // todo
+router.post('/resend-verification', resendVerification); // todo
 
 export default router;
