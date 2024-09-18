@@ -77,7 +77,6 @@ async function getNextAvailableGuestUsername(): Promise<string> {
 
 // Create and export User model
 const User = mongoose.model<IUser>('User', userSchema);
-
 export default User;
 
 export function makeUserPreview(user: IUser) {

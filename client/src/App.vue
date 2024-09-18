@@ -1,30 +1,37 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+    <div class="app-layout">
+        <TheNavigation />
+        <div class="app-layout__content">
+            <router-view name="page"></router-view>
+        </div>
+    </div>
+    <TheModalContainer />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<script setup lang="ts">
+import TheNavigation from './components/TheNavigation.vue';
+import TheModalContainer from './components/modals/TheModalContainer.vue';
+</script>
+
+<style lang="scss">
+@import './assets/scss/styles.scss';
+@import './assets/scss/markdown-styles.scss';
+
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh; // Old browsers
+    min-height: 100dvh; // New browsers
+    min-height: -webkit-fill-available; // iOS
+    max-height: 100vh; // Old browsers
+    max-height: 100dvh; // New browsers
+    max-height: -webkit-fill-available; // iOS
+    > .app-layout__content {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+    }
 }
 </style>

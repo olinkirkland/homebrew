@@ -1,4 +1,5 @@
 import { StatusCodes } from "http-status-codes";
+import Game, { IGame } from "../models/Game";
 import { logger } from "../utils/logger";
 
 
