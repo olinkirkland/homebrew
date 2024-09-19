@@ -1,0 +1,34 @@
+.theme--dark {
+    // Primary
+    --primary-0: $oc-blue-3
+
+// Surface
+
+// 
+
+    //  Translucent
+    --translucent-very-light: rgba(0, 0, 0, 0.1);
+    --translucent-light: rgba(0, 0, 0, 0.2);
+    --translucent-heavy: rgba(0, 0, 0, 0.6);
+
+    // Colors
+    --red: #f03e3e;
+    --orange: #ff922b;
+    --yellow: #ffd43b;
+    --green: #51cf66;
+    --teal: #20c997;
+    --blue: #339af0;
+    --indigo: #5c7cfa;
+    --purple: #7950f2;
+    --pink: #f06595;
+    --grey: #adb5bd;
+    --light-grey: #ced4da;
+    --black: #131313;
+
+    // Shadows
+    --shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
+
+    // Font
+    --heading-font: 'Georgia', serif;
+    --body-font: 'Georgia', serif;
+}

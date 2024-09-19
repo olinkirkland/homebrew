@@ -1,4 +1,4 @@
-<template>THE NAVIGATION</template>
+<template>THE LAYOUT</template>
 
 <script setup lang="ts"></script>
 

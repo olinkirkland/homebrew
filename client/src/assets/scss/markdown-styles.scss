@@ -1,0 +1,50 @@
+span.markdown {
+    line-height: 1.6;
+
+    > .strong {
+        white-space: nowrap;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        border-bottom: 1px solid currentColor;
+    }
+
+    > .em {
+        font-style: italic;
+        font-size: inherit;
+    }
+
+    > .t {
+        white-space: nowrap;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+
+        padding: 0rem 0.4rem;
+        opacity: 0.8;
+        border-radius: 3px;
+        background-color: var(--light);
+        color: var(--dark);
+
+        &--dice {
+            padding-right: 0.1rem;
+            background-color: transparent;
+            color: var(--light);
+            > i {
+                font-size: 1.4rem;
+                position: relative;
+                transform: translateY(-0.2rem);
+                height: 1rem;
+            }
+        }
+    }
+
+    > br.paragraph-break {
+        margin-bottom: 1rem;
+    }
+}

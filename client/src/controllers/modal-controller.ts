@@ -10,7 +10,7 @@ export default class ModalController {
   private static instance: ModalController | null = null;
   private subject: Subject<ModalDispatch> = new Subject<ModalDispatch>();
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): ModalController {
     return this.instance || (this.instance = new this());

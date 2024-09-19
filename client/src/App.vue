@@ -1,6 +1,6 @@
 <template>
-    <div class="app-layout">
-        <TheNavigation />
+    <div class="app-layout theme-light">
+        <TheLayout />
         <div class="app-layout__content">
             <router-view name="page"></router-view>
         </div>
@@ -9,13 +9,16 @@
 </template>
 
 <script setup lang="ts">
-import TheNavigation from './components/TheNavigation.vue';
+import TheLayout from './components/TheLayout.vue';
 import TheModalContainer from './components/modals/TheModalContainer.vue';
 </script>
 
 <style lang="scss">
+@import './assets/scss/reset.scss';
 @import './assets/scss/styles.scss';
 @import './assets/scss/markdown-styles.scss';
+@import './assets/scss/themes/theme-light.scss';
+@import './assets/scss/themes/theme-dark.scss';
 
 .app-layout {
     display: flex;

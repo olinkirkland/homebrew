@@ -2,6 +2,8 @@ import mixpanel from 'mixpanel-browser';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import App from './App.vue';
+import ModalController from './controllers/modal-controller';
+import ConfirmModal from '@/components/modals/templates/ConfirmModal.vue';
 // import { initializeConnection } from './api/connection';
 // import Divider from './components/Divider.vue';
 // import { router } from './router';
@@ -28,3 +30,14 @@ if (window.location.hostname !== 'localhost') {
 } else {
   console.warn('Accessing from localhost; Mixpanel is disabled.');
 }
+
+// Test a modal
+
+ModalController.open(ConfirmModal, {
+  title: 'Test',
+  message: 'This is a test of the confirm modal.',
+  onConfirm: () => console.log('Confirmed!'),
+  onCancel: () => console.log('Canceled!'),
+  confirmText: 'Yes',
+  cancelText: 'No',
+});
