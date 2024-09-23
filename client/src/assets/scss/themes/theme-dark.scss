@@ -1,17 +1,17 @@
-.theme--dark {
-    // Primary
-    --primary-0: $oc-blue-3
-
-// Surface
-
-// 
-
-    //  Translucent
-    --translucent-very-light: rgba(0, 0, 0, 0.1);
-    --translucent-light: rgba(0, 0, 0, 0.2);
-    --translucent-heavy: rgba(0, 0, 0, 0.6);
-
+.theme--light {
     // Colors
+    --primary: #339af0; // Used for primary actions, buttons, highlights
+    --secondary: #2ecc71; // Used for secondary actions or accents
+
+    --background: #f5f5f5; // Overall page background
+    --surface: #f1f1f1; // For cards, modals, or containers on top of background
+    --error: #e74c3c; // Used for error states, alerts
+
+    --on-primary: #f5f5f5; // Text/icons on primary-colored elements
+    --on-secondary: #333333; // Text/icons on secondary-colored elements
+    --on-surface: #333333; // Text/icons on surface-colored elements
+
+    // Rainbow
     --red: #f03e3e;
     --orange: #ff922b;
     --yellow: #ffd43b;
@@ -26,9 +26,12 @@
     --black: #131313;
 
     // Shadows
-    --shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
+    --shadow: rgba(0, 0, 0, 0.4) 0px 2px 12px;
 
     // Font
-    --heading-font: 'Georgia', serif;
-    --body-font: 'Georgia', serif;
+    --heading-font: 'Arial', serif;
+    --body-font: 'Arial', serif;
+
+    // Theme brightness will determine if panels are lighter or darker
+    --theme-brightness: -1;
 }

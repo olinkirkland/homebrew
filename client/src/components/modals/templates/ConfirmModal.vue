@@ -9,7 +9,7 @@
             <div class="confirm">
                 <p v-html="props.message"></p>
 
-                <div class="row wrap">
+                <div class="row wrap gap">
                     <button
                         class="btn btn--alt mobile-full-width"
                         @click="props.onConfirm"

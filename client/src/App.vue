@@ -1,21 +1,26 @@
 <template>
-    <div class="app-layout theme-light">
+    <div class="app-layout" :class="`theme--${theme}`">
         <TheLayout />
         <div class="app-layout__content">
             <router-view name="page"></router-view>
         </div>
     </div>
-    <TheModalContainer />
+    <TheModalContainer :class="`theme--${theme}`" />
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import TheLayout from './components/TheLayout.vue';
 import TheModalContainer from './components/modals/TheModalContainer.vue';
+
+const theme = ref('light');
 </script>
 
 <style lang="scss">
-@import './assets/scss/reset.scss';
 @import './assets/scss/styles.scss';
+@import './assets/scss/reset.scss';
+@import './assets/scss/typography.scss';
+@import './assets/scss/buttons.scss';
 @import './assets/scss/markdown-styles.scss';
 @import './assets/scss/themes/theme-light.scss';
 @import './assets/scss/themes/theme-dark.scss';

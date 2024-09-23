@@ -1,7 +1,7 @@
 <template>
   <div class="modal__header">
     <slot></slot>
-    <button class="btn--icon" v-if="closeButton" @click="onClickClose">
+    <button class="icon" v-if="closeButton" @click="onClickClose">
       <i class="fas fa-times"></i>
     </button>
   </div>
