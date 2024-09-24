@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
 
 :root {
-    --font: 'Merriweather', serif;
-    font-family: var(--font);
+    --ui-font: 'Merriweather', serif;
+    --handwriting-font: 'Playwrite DE Grund', cursive;
+    font-family: var(--ui-font);
 }
 
 h1,
@@ -23,10 +25,9 @@ h2 {
 }
 
 h3 {
-    font-size: 2rem;
-    text-transform: lowercase;
-    font-variant: small-caps;
-    letter-spacing: 0.1rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 h4 {
@@ -49,4 +50,11 @@ p {
 a {
     text-decoration: none;
     color: currentColor;
+}
+
+label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
 }

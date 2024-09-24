@@ -1,4 +1,4 @@
-.theme--dark {
+.theme--standard {
     // Colors
     --primary: #339af0; // Used for primary actions, buttons, highlights
     --secondary: #2ecc71; // Used for secondary actions or accents
@@ -26,6 +26,9 @@
     --grey: #adb5bd;
     --light-grey: #ced4da;
     --black: #131313;
+
+    // Handwriting
+    --handwriting: var(--red);
 
     // Shadows
     --shadow: rgba(0, 0, 0, 0.4) 0px 2px 12px;

@@ -26,11 +26,11 @@ function onClickClose() {
 .modal__header {
     display: flex;
     justify-content: center;
-    background-color: var(--dark);
     align-items: center;
+    background-color: var(--dark);
     border-bottom: 1px solid var(--dark-2);
     width: 100%;
-    min-height: 5.2rem;
+    height: 5.2rem;
     padding: 2rem 2rem 1.2rem 2rem;
     gap: 1.6rem;
 

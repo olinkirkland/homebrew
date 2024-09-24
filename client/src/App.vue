@@ -2,7 +2,7 @@
     <div class="app-layout" :class="`theme--${theme}`">
         <TheLayout />
         <div class="app-layout__content">
-            <router-view name="page"></router-view>
+            <!-- <router-view name="page"></router-view> -->
         </div>
     </div>
     <TheModalContainer :class="`theme--${theme}`" />
@@ -13,8 +13,7 @@ import { ref } from 'vue';
 import TheLayout from './components/TheLayout.vue';
 import TheModalContainer from './components/modals/TheModalContainer.vue';
 
-const theme = ref('dark');
-console.log('theme', theme);
+const theme = ref('standard');
 </script>
 
 <style lang="scss">
@@ -24,8 +23,7 @@ console.log('theme', theme);
 @import './assets/scss/buttons.scss';
 @import './assets/scss/markdown-styles.scss';
 @import './assets/scss/icons.scss';
-@import './assets/scss/themes/theme-light.scss';
-@import './assets/scss/themes/theme-dark.scss';
+@import './assets/scss/themes/standard-theme.scss';
 
 .app-layout {
     display: flex;
