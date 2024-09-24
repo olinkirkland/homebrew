@@ -8,6 +8,7 @@
         <template v-slot:content>
             <div class="confirm">
                 <p v-html="props.message"></p>
+                <Divider />
 
                 <div class="input-group">
                     <label v-if="props.label">{{ props.label }}</label>
@@ -33,6 +34,7 @@
 </template>
 
 <script setup lang="ts">
+import Divider from '@/components/Divider.vue';
 import InputField from '@/components/inputs/InputField.vue';
 import ModalController from '@/controllers/modal-controller';
 import { ref } from 'vue';
