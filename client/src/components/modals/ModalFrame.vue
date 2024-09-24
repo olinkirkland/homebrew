@@ -18,8 +18,6 @@
     display: flex;
     flex-direction: column;
     animation: animate-in 0.2s ease;
-    min-width: 36rem;
-    max-width: 48rem;
     color: var(--on-surface);
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -50,11 +48,5 @@
 
 :deep(section:last-of-type) {
     padding-bottom: 2rem;
-}
-
-@media (max-width: 768px) {
-    .modal {
-        border: none;
-    }
 }
 </style>

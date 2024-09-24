@@ -31,24 +31,3 @@ if (window.location.hostname !== 'localhost') {
 } else {
   console.warn('Accessing from localhost; Mixpanel is disabled.');
 }
-
-// Test a modal
-
-// ModalController.open(ConfirmModal, {
-//   title: 'Begin the test',
-//   message: 'This is a test of the confirm modal.',
-//   onConfirm: () => console.log('Confirmed!'),
-//   // onCancel: () => console.log('Canceled!'),
-//   confirmText: 'Yes',
-//   cancelText: 'No',
-// });
-
-ModalController.open(InputModal, {
-  title: 'Begin the test',
-  message: 'This is a test of the input modal. Answer this question?',
-  onConfirm: (value: string) => console.log('Confirmed!', value),
-  // onCancel: () => console.log('Canceled!'),
-  confirmText: 'Yes',
-  cancelText: 'No',
-  label: 'Your Answer',
-});

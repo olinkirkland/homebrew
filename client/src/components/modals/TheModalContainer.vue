@@ -1,9 +1,5 @@
 <template>
-    <div
-        v-if="!!currentModal"
-        class="modal-container"
-        :class="currentModalConfig?.backgroundClass"
-    >
+    <div class="modal-container" :class="{ active: !!currentModal }">
         <div
             class="modal-container__background"
             @click="onClickBackground()"
@@ -26,6 +22,7 @@ const currentModalConfig = shallowRef<any | null>(null);
 const fadeInterval = ref();
 
 function onClickBackground() {
+    console.log('onClickBackground');
     if (currentModalConfig.value?.closeOnClick) ModalController.close();
 }
 
@@ -70,7 +67,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
                 const modalChild = modalChildren.shift();
                 modalChild?.classList.remove('hidden');
             }
-        }, 50);
+        }, 30);
     });
 });
 </script>
@@ -96,9 +93,24 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
         position: absolute;
         top: 0;
         z-index: -1;
-        background-color: rgba(0, 0, 0, 0.8);
+        background: repeating-linear-gradient(
+            45deg,
+            rgba(60, 60, 80, 0.6),
+            rgb(60, 60, 80, 0.6) 1rem,
+            rgba(65, 65, 90, 0.6) 1rem,
+            rgb(65, 65, 90, 0.6) 2rem
+        );
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
+        transition: all 0.2s;
+        opacity: 1;
+    }
+
+    &:not(.active) {
+        pointer-events: none;
+        > .modal-container__background {
+            opacity: 0;
+        }
     }
 }
 
@@ -124,7 +136,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 @keyframes animate-in {
     from {
         opacity: 0.5;
-        transform: scale(0.98);
+        transform: scale(0.9);
     }
     to {
         opacity: 1;
@@ -152,7 +164,6 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
         max-height: 100vh; // Old browsers
         max-height: 100dvh; // New browsers
         max-height: -webkit-fill-available; // iOS
-        border-radius: 0;
         animation: none;
     }
 }
