@@ -7,5 +7,5 @@
     left: 0;
     width: 100%;
     height: 100%;
-    filter: brightness(calc(1 + (var(--theme-brightness) * $brightness)));
+    filter: brightness(calc(1 + ((var(--theme-brightness) * $brightness))));
 }

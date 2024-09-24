@@ -4,6 +4,7 @@
         <div class="modal__content">
             <slot name="content"></slot>
         </div>
+        <div class="modal__background"></div>
     </div>
 </template>
 
@@ -13,25 +14,29 @@
 @import '@/assets/scss/mixins.scss';
 
 .modal {
+    position: relative;
     display: flex;
     flex-direction: column;
     animation: animate-in 0.2s ease;
     min-width: 36rem;
     max-width: 48rem;
-    background-color: var(--surface);
-    border: 1px solid var(--on-surface);
     color: var(--on-surface);
     overflow: hidden;
     box-shadow: var(--shadow);
 
-    @include border-image-common(
-        'panel/panel-008',
-        0
-    );
+    .modal__background {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        @include border-image-common('panel/panel-008', 1);
+    }
 
     .modal__content {
         display: flex;
-        padding: 2rem;
+        padding: 0 6.4rem 3.2rem 6.4rem;
         flex: 1;
         max-width: 100%;
         overflow-x: hidden;

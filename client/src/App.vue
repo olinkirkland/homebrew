@@ -13,7 +13,8 @@ import { ref } from 'vue';
 import TheLayout from './components/TheLayout.vue';
 import TheModalContainer from './components/modals/TheModalContainer.vue';
 
-const theme = ref('light');
+const theme = ref('dark');
+console.log('theme', theme);
 </script>
 
 <style lang="scss">
@@ -22,6 +23,7 @@ const theme = ref('light');
 @import './assets/scss/typography.scss';
 @import './assets/scss/buttons.scss';
 @import './assets/scss/markdown-styles.scss';
+@import './assets/scss/icons.scss';
 @import './assets/scss/themes/theme-light.scss';
 @import './assets/scss/themes/theme-dark.scss';
 

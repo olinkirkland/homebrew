@@ -2,27 +2,21 @@
     <ModalFrame>
         <template v-slot:header>
             <ModalHeader closeButton :closeButtonAction="onClickCancel">
-                <h2>{{ props.title }}</h2>
+                <h3>{{ props.title }}</h3>
             </ModalHeader>
         </template>
         <template v-slot:content>
             <div class="confirm">
                 <p v-html="props.message"></p>
 
-                <div class="row wrap gap">
-                    <button
-                        class="btn btn--alt mobile-full-width"
-                        @click="props.onConfirm"
-                    >
-                        <span>{{ props.confirmText || 'Yes' }}</span>
-                    </button>
-                    <button
-                        class="btn mobile-full-width"
-                        @click="onClickCancel"
-                    >
+                <div class="row wrap gap center">
+                    <button class="btn" @click="onClickCancel">
                         <span>{{
                             props.cancelText || 'No, I changed my mind'
                         }}</span>
+                    </button>
+                    <button class="btn btn--primary" @click="props.onConfirm">
+                        <span>{{ props.confirmText || 'Yes' }}</span>
                     </button>
                 </div>
             </div>

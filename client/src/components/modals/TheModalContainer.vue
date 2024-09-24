@@ -65,7 +65,6 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 
         fadeInterval.value = setInterval(() => {
             if (!modalChildren.length) {
-                console.log('clearing interval');
                 clearInterval(fadeInterval.value);
             } else {
                 const modalChild = modalChildren.shift();

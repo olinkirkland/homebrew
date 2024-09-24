@@ -2,10 +2,12 @@
 
 button.btn {
     position: relative;
-
     background-color: transparent;
     height: 4rem;
-    padding: 0 2rem;
+    padding: 0 3.2rem;
+    font-family: var(--body-font);
+    font-size: 1.6rem;
+    color: var(--on-surface);
     cursor: pointer;
 
     > * {
@@ -16,12 +18,23 @@ button.btn {
     &::before {
         content: '';
         position: absolute;
-        @include border-image-common('panel/panel-001', 0.2);
-        opacity: 0.8;
+        @include border-image-common('border/panel-border-009', 0);
+    }
+
+    &:active {
+        transform: translateY(0.1rem);
+        filter: brightness(0.8);
     }
 }
 
-button.icon {
+button.btn.btn--primary {
+    color: var(--on-surface-inverted);
+    &::before {
+        @include border-image-common('panel/panel-009', 0);
+    }
+}
+
+button.btn-icon {
     background-color: transparent;
     border: 1px solid transparent;
     color: var(--on-secondary);
@@ -32,4 +45,11 @@ button.icon {
     align-items: center;
     padding: 0;
     border-radius: 0;
+    cursor: pointer;
+
+    &.close {
+        position: absolute;
+        top: 1.6rem;
+        right: 1.6rem;
+    }
 }

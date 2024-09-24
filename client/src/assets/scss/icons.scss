@@ -1,0 +1,21 @@
+.icon {
+    position: relative;
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: currentColor;
+
+    &::after {
+        content: '';
+        position: absolute;
+        background-size: contain;
+        object-fit: contain;
+        width: 1.4rem;
+        height: 1.4rem;
+        top: 0;
+        left: 0;
+    }
+
+    &--close::after {
+        background-image: url('assets/icons/close.png');
+    }
+}
