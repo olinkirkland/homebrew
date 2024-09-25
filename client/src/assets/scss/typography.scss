@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&display=swap');
 
 :root {
-    --ui-font: 'Merriweather', serif;
-    font-family: var(--ui-font);
+    --font-ui: 'Merriweather', serif;
+    --font-logo: 'Oleo Script Swash Caps', cursive;
+    font-family: var(--font-ui);
 }
 
 input {
-    font-family: var(--ui-font);
+    font-family: var(--font-ui);
 }
 
 h1,

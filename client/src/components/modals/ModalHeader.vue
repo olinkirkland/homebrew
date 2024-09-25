@@ -27,8 +27,6 @@ function onClickClose() {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--dark);
-    border-bottom: 1px solid var(--dark-2);
     width: 100%;
     height: 5.2rem;
     padding: 2rem 2rem 1.2rem 2rem;

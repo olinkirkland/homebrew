@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     animation: animate-in 0.2s ease;
-    color: var(--on-surface);
+    color: var(--color-on-surface);
     overflow: hidden;
     box-shadow: var(--shadow);
 

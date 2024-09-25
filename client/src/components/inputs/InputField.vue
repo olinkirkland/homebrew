@@ -38,7 +38,7 @@ const emit = defineEmits(['update:modelValue']);
         height: fit-content;
         font-size: 1.4rem;
         background-color: transparent;
-        color: var(--yellow);
+        color: var(--color-yellow);
         font-style: italic;
         width: 100%;
         border: none;

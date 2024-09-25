@@ -11,7 +11,7 @@
     background: linear-gradient(
         to right,
         transparent,
-        var(--on-surface),
+        var(--color-on-surface),
         transparent
     );
     opacity: 0.2;

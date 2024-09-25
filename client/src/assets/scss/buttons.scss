@@ -5,9 +5,9 @@ button.btn {
     background-color: transparent;
     height: 4rem;
     padding: 0 3.2rem;
-    font-family: var(--body-font);
+    font-family: var(--ui-font);
     font-size: 1.6rem;
-    color: var(--on-surface);
+    color: var(--color-on-surface);
     cursor: pointer;
 
     > * {
@@ -28,16 +28,32 @@ button.btn {
 }
 
 button.btn.btn--primary {
-    color: var(--on-surface-inverted);
+    color: var(--color-on-surface-inverted);
     &::before {
         @include border-image-common('panel/panel-009', 0);
+    }
+}
+
+button.btn.btn--nav {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--color-on-surface);
+    &::before {
+        @include border-image-common('border/panel-border-000', 0);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    &.active::before {
+        opacity: 1;
     }
 }
 
 button.btn-icon {
     background-color: transparent;
     border: 1px solid transparent;
-    color: var(--on-secondary);
+    color: var(--color-on-secondary);
     height: 3.2rem;
     width: 3.2rem;
     display: flex;
