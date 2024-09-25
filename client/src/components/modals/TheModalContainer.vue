@@ -20,7 +20,6 @@ const modalRef = ref();
 const currentModal = shallowRef<ComponentOptions | null>(null);
 const currentModalConfig = shallowRef<any | null>(null);
 const fadeInterval = ref();
-
 function onClickBackground() {
     console.log('onClickBackground');
     if (currentModalConfig.value?.closeOnClick) ModalController.close();
@@ -136,7 +135,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 @keyframes animate-in {
     from {
         opacity: 0.5;
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
     to {
         opacity: 1;

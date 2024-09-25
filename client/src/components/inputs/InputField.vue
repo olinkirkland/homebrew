@@ -52,7 +52,7 @@ const emit = defineEmits(['update:modelValue']);
         left: 0;
         width: 1.2rem;
         height: 1.2rem;
-        @include border-image-common('border/panel-border-014', 0);
+        @include border-image-common('border/panel-border-013', 0);
     }
 }
 </style>

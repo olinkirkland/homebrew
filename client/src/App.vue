@@ -1,9 +1,6 @@
 <template>
     <div class="app-layout" :class="`theme--${theme}`">
         <TheLayout />
-        <div class="app-layout__content">
-            <!-- <router-view name="page"></router-view> -->
-        </div>
     </div>
     <TheModalContainer :class="`theme--${theme}`" />
 </template>

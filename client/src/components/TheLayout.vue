@@ -1,7 +1,9 @@
 <template>
     <div class="layout">
         <TheNavigation />
-        <div class="page-container"></div>
+        <div class="page-container">
+            <router-view name="page"></router-view>
+        </div>
         <TheFooter />
     </div>
 </template>

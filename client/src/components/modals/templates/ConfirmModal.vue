@@ -10,13 +10,13 @@
                 <p v-html="props.message"></p>
 
                 <div class="row wrap gap center">
-                    <button class="btn" @click="onClickCancel">
+                    <button class="btn" @click="props.onConfirm">
+                        <span>{{ props.confirmText || 'Yes' }}</span>
+                    </button>
+                    <button class="btn btn--primary" @click="onClickCancel">
                         <span>{{
                             props.cancelText || 'No, I changed my mind'
                         }}</span>
-                    </button>
-                    <button class="btn btn--primary" @click="props.onConfirm">
-                        <span>{{ props.confirmText || 'Yes' }}</span>
                     </button>
                 </div>
             </div>

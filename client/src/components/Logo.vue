@@ -23,6 +23,7 @@
         font-family: var(--font-logo);
         font-size: 2.8rem;
         font-weight: 400;
+        text-shadow: var(--shadow-text);
     }
 }
 </style>

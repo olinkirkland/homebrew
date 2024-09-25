@@ -2,12 +2,9 @@ import mixpanel from 'mixpanel-browser';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import App from './App.vue';
-import ModalController from './controllers/modal-controller';
-import ConfirmModal from '@/components/modals/templates/ConfirmModal.vue';
-import InputModal from './components/modals/templates/InputModal.vue';
 // import { initializeConnection } from './api/connection';
 // import Divider from './components/Divider.vue';
-// import { router } from './router';
+import { router } from '@/router';
 
 // initializeConnection();
 
@@ -20,7 +17,7 @@ const app = createApp(App);
 // Plugins
 const pinia = createPinia();
 app.use(pinia);
-// app.use(router);
+app.use(router);
 
 app.mount('#app');
 

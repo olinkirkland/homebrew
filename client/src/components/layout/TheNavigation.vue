@@ -4,37 +4,7 @@
 
         <div class="nav__content">
             <Logo />
-            <ul class="row gap">
-                <li>
-                    <button
-                        class="btn btn--nav"
-                        :class="{ active: activePage === 'home' }"
-                        @click="activePage = 'home'"
-                    >
-                        <span>Home</span>
-                    </button>
-                </li>
-
-                <li>
-                    <button
-                        class="btn btn--nav"
-                        :class="{ active: activePage === 'play' }"
-                        @click="activePage = 'play'"
-                    >
-                        <span>Play</span>
-                    </button>
-                </li>
-
-                <li>
-                    <button
-                        class="btn btn--nav"
-                        :class="{ active: activePage === 'design' }"
-                        @click="activePage = 'design'"
-                    >
-                        <span>Design</span>
-                    </button>
-                </li>
-            </ul>
+            <ul class="row gap center"></ul>
             <div class="user-actions">
                 <button class="btn btn--diamond" @click="openSettingsModal">
                     <i class="icon icon--hammer"></i>
@@ -55,6 +25,7 @@ import { ref } from 'vue';
 import Divider from '../Divider.vue';
 import Logo from '../Logo.vue';
 import ConfirmModal from '../modals/templates/ConfirmModal.vue';
+import InputModal from '../modals/templates/InputModal.vue';
 
 const activePage = ref('home');
 
@@ -68,7 +39,18 @@ function openSettingsModal() {
 }
 
 function openUserModal() {
-    console.log('User modal opened');
+    ModalController.open(InputModal, {
+        title: 'My Profile',
+        message: 'Please enter a new username.',
+        cancelText: 'Cancel',
+        confirmText: 'Save',
+        confirmAction: () => ModalController.close(),
+        label: 'Username',
+        inputPlaceholder: 'e.g. John Doe',
+        onConfirm: (input: string) => {
+            console.log('User input:', input);
+        },
+    });
 }
 </script>
 
@@ -99,8 +81,9 @@ nav {
         background: linear-gradient(
             180deg,
             rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.2) 100%
+            rgba(0, 0, 0, 0.4) 100%
         );
+        backdrop-filter: blur(10px);
     }
 
     .logo {
