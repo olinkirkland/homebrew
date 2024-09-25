@@ -39,6 +39,8 @@ button.btn.btn--nav {
     font-size: 1.2rem;
     letter-spacing: 2px;
     color: var(--color-on-surface);
+    padding: unset;
+    width: 12rem;
     &::before {
         @include border-image-common('border/panel-border-000', 0);
         opacity: 0;
@@ -47,6 +49,21 @@ button.btn.btn--nav {
 
     &.active::before {
         opacity: 1;
+    }
+}
+
+button.btn.btn--diamond {
+    width: 3.2rem;
+    height: 3.2rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before {
+        box-shadow: var(--shadow);
+        transform: rotate(45deg);
+        @include border-image-common('panel/panel-001', 0);
     }
 }
 

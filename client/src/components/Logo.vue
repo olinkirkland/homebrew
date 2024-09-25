@@ -1,6 +1,6 @@
 <template>
     <div class="logo">
-        <img src="/assets/images/logo.png" alt="Homebrew Logo" />
+        <!-- <img src="/assets/images/logo.png" alt="Homebrew Logo" /> -->
         <h1>Homebrew</h1>
     </div>
 </template>

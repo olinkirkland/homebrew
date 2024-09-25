@@ -18,4 +18,12 @@
     &--close::after {
         background-image: url('assets/icons/close.png');
     }
+
+    &--user::after {
+        background-image: url('assets/icons/user.png');
+    }
+
+    &--hammer::after {
+        background-image: url('assets/icons/hammer.png');
+    }
 }

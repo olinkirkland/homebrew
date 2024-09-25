@@ -8,12 +8,7 @@
 .divider {
     width: 100%;
     height: 0.2rem;
-    background: linear-gradient(
-        to right,
-        transparent,
-        var(--color-on-surface),
-        transparent
-    );
+    background: linear-gradient(to right, transparent, white, transparent);
     opacity: 0.2;
 }
 </style>
