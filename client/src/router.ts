@@ -1,13 +1,14 @@
 import { ref } from 'vue';
 import { RouterOptions, createRouter, createWebHistory } from 'vue-router';
 import { createGuestAccount } from './api/account';
+import { fetchAccessToken } from './api/connection';
 import ErrorModal from './components/modals/templates/ErrorModal.vue';
-import LoadingModal from './components/modals/templates/LoadingModal.vue';
+import InitialLoading from './components/modals/templates/InitialLoading.vue';
 import TheHomePage from './components/pages/TheHomePage.vue';
 import TheLostPage from './components/pages/TheLostPage.vue';
 import ModalController from './controllers/modal-controller';
 import { useTokenStore } from './stores/token-store';
-import { reloadPage } from './utils/browser-utils';
+import { reloadPage, wait } from './utils/browser-utils';
 
 export const currentPageName = ref();
 export enum PageName {
@@ -63,15 +64,21 @@ router.beforeEach(async (to, from, next) => {
     // Before each route change, check if there's an access token
     // If not, create a new guest account
     if (!useTokenStore().accessToken) {
-        ModalController.open(LoadingModal, { message: 'Connecting...' });
+        ModalController.open(InitialLoading, { message: 'Connecting...' });
 
         let response;
-        if (!useTokenStore().refreshToken)
+        if (!useTokenStore().refreshToken) {
             response = await createGuestAccount(); // Gets a new, guest refresh token
-
-        if (response) ModalController.close();
+        }
         else {
-            await new Promise((resolve) => setTimeout(resolve, 400));
+            response = await fetchAccessToken(); // Gets a new access token using the refresh token
+        }
+
+        await wait(0.4);
+        if (response) {
+            ModalController.close();
+        } else {
+            await wait(0.4);
             ModalController.open(ErrorModal, {
                 message: 'Failed to connect.', buttonLabel: 'Reload', onClickButton: reloadPage
             });

@@ -11,6 +11,7 @@ import { server } from './connection';
 export async function createGuestAccount() {
   try {
     const response = await server.post('/auth/guest');
+    console.log('createGuestAccount response:', response);
     if (response.data.refreshToken) {
       useTokenStore().storeRefreshToken(response.data.refreshToken);
       useTokenStore().accessToken = response.data.accessToken;

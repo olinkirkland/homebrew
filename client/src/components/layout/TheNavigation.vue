@@ -5,8 +5,14 @@
         <div class="nav__content">
             <Logo />
             <ul class="row gap center">
-                <p>Refresh Token: {{ useTokenStore().refreshToken || 'N/A' }}</p>
-                <p>Access Token: {{ useTokenStore().accessToken || 'N/A' }}</p>
+                <p>
+                    Refresh Token:
+                    {{ shorten(useTokenStore().refreshToken || 'N/A') }}
+                </p>
+                <p>
+                    Access Token:
+                    {{ shorten(useTokenStore().accessToken || 'N/A') }}
+                </p>
             </ul>
             <div class="user-actions">
                 <button class="btn btn--diamond" @click="openSettingsModal">
@@ -24,12 +30,13 @@
 
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
+import { useTokenStore } from '@/stores/token-store';
+import { shorten } from '@/utils/string-utils';
 import { ref } from 'vue';
 import Divider from '../Divider.vue';
 import Logo from '../Logo.vue';
 import ConfirmModal from '../modals/templates/ConfirmModal.vue';
 import InputModal from '../modals/templates/InputModal.vue';
-import { useTokenStore } from '@/stores/token-store';
 
 const activePage = ref('home');
 

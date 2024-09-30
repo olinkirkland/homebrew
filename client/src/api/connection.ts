@@ -68,9 +68,8 @@ export function addInterceptors() {
         // This is done by returning the server call with the original config
         // Add the new access token to the Authorization header
         const config = error.config;
-        config.headers['Authorization'] = `Bearer ${
-          useTokenStore().accessToken
-        }`;
+        config.headers['Authorization'] = `Bearer ${useTokenStore().accessToken
+          }`;
         return server(config);
       }
 
@@ -79,6 +78,11 @@ export function addInterceptors() {
   );
 }
 
+/**
+ * Fetches a new access token using the refresh token
+ * @returns {Promise} The response from the server
+ * @throws {Promise} If the refresh token is invalid
+ */
 export async function fetchAccessToken() {
   let response;
   try {
@@ -89,10 +93,11 @@ export async function fetchAccessToken() {
     response = await server.put('/auth/token', {
       refreshToken: useTokenStore().refreshToken
     });
+    return response;
   } catch (error) {
     console.error('Invalid refresh token');
     logout();
-    return;
+    return Promise.reject('Invalid refresh token');
   }
 
   useTokenStore().accessToken = response.data.accessToken;

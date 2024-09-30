@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { IUser, makeGuestUser } from '../models/User';
 import * as authService from '../services/auth-service';
 import { REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from '../utils/config';
-import { makeAccessToken, verifyRefreshToken } from '../utils/token-util';
+import { makeAccessToken, makeRefreshToken, verifyRefreshToken } from '../utils/token-util';
 
 /**
  * Creates a new guest user.
@@ -15,11 +15,9 @@ export async function createNewGuest(req: Request, res: Response) {
     const guestUser = await makeGuestUser();
 
     try {
-        const token = jwt.sign({ id: guestUser.id }, REFRESH_TOKEN_SECRET, {
-            expiresIn: REFRESH_TOKEN_EXPIRATION
-        });
-
-        res.status(StatusCodes.CREATED).json({ success: true, token });
+        const refreshToken = makeRefreshToken(guestUser.id);
+        const accessToken = makeAccessToken(guestUser.id);
+        res.status(StatusCodes.CREATED).json({ success: true, refreshToken, accessToken });
     } catch (error) {
         console.error(error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -79,9 +77,9 @@ export async function fetchToken(req: Request, res: Response) {
             return res.status(StatusCodes.UNAUTHORIZED).json(result);
         const accessToken = makeAccessToken(result.id);
 
-        res.status(StatusCodes.OK).json({ success: true, token: accessToken });
+        return res.status(StatusCodes.OK).json({ success: true, token: accessToken });
     } catch (error) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
             message: 'Server error'
         });

@@ -17,7 +17,7 @@ const router = Router();
 
 router.post('/guest', createNewGuest);
 router.post('/login', login);
-router.get('/token', fetchToken);
+router.put('/token', fetchToken);
 router.post('/register', authenticate, identifyUser, register);
 router.post('/logout', authenticate, logout);
 router.post('/forgot-password', forgotPassword); // todo
