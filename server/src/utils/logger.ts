@@ -32,23 +32,32 @@ export const logger = createLogger({
     transports: transports
 });
 
-function formatMetadata(metadata: Record<string, any>, indent = ''): string {
+function formatMetadata(metadata: Record<string, any>, indent = '', isLast = true): string {
     if (!Object.keys(metadata).length) return '';
 
     const lines: string[] = [];
-    for (const [key, value] of Object.entries(metadata)) {
-        if (typeof value === 'object' && value !== null) {
-            lines.push(`${indent}├─ ${key}`);
-            lines.push(formatMetadata(value, `${indent}│  `));
-        } else {
-            lines.push(`${indent}├─ ${key}: ${value}`);
-        }
-    }
+    const entries = Object.entries(metadata);
+    entries.forEach(([key, value], index) => {
+        const isCurrentLast = index === entries.length - 1;
 
-    // Format for the last item
-    if (lines.length) {
-        lines[lines.length - 1] = lines[lines.length - 1].replace('├─', '└─');
-    }
+        if (Array.isArray(value)) {
+            lines.push(`${indent}${isCurrentLast ? '└─' : '├─'} ${key}`);
+            value.forEach((item, itemIndex) => {
+                const itemIsLast = itemIndex === value.length - 1;
+                if (typeof item === 'object' && item !== null) {
+                    lines.push(`${indent}${isCurrentLast ? '   ' : '│  '}${itemIsLast ? '└─' : '├─'} ${itemIndex}`);
+                    lines.push(formatMetadata(item, `${indent}${isCurrentLast ? '   ' : '│  '}   `, itemIsLast));
+                } else {
+                    lines.push(`${indent}${isCurrentLast ? '   ' : '│  '}${itemIsLast ? '└─' : '├─'} ${item}`);
+                }
+            });
+        } else if (typeof value === 'object' && value !== null) {
+            lines.push(`${indent}${isCurrentLast ? '└─' : '├─'} ${key}`);
+            lines.push(formatMetadata(value, `${indent}${isCurrentLast ? '   ' : '│  '}`, isCurrentLast));
+        } else {
+            lines.push(`${indent}${isCurrentLast ? '└─' : '├─'} ${key}: ${value}`);
+        }
+    });
 
     const spaces = ' '.repeat(4);
     lines.forEach((line, index) => {
@@ -57,3 +66,4 @@ function formatMetadata(metadata: Record<string, any>, indent = ''): string {
 
     return `\n\x1b[90m${lines.join('\n')}\x1b[0m`; // gray color
 }
+

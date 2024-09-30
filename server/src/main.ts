@@ -1,12 +1,13 @@
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import express from 'express';
 import { connectToDatabase } from './config/database';
 import { startScheduledTasks } from './config/schedule';
 import { logRequest } from './middleware/request-logging-middleware';
 import User from './models/User';
 import { routes } from './routes/routes';
-import { logger } from './utils/logger';
 import { PORT } from './utils/config';
+import { logger } from './utils/logger';
 
 export const app = express();
 const port = PORT || 3000;
@@ -45,6 +46,22 @@ async function startServer() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(logRequest);
+
+    // Cors
+    const origin = [
+        'http://localhost:5173',
+        'http://87.186.23.128:5173',
+        'https://onlineinthedark.com'
+    ];
+
+    logger.info('Allowed origins', { origins: origin });
+
+    app.use(
+        cors({
+            origin,
+            credentials: true
+        })
+    );
 
     // Routes
     app.use('/api', routes); // Assuming all routes are prefixed with '/api'

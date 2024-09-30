@@ -4,7 +4,10 @@
 
         <div class="nav__content">
             <Logo />
-            <ul class="row gap center"></ul>
+            <ul class="row gap center">
+                <p>Refresh Token: {{ useTokenStore().refreshToken || 'N/A' }}</p>
+                <p>Access Token: {{ useTokenStore().accessToken || 'N/A' }}</p>
+            </ul>
             <div class="user-actions">
                 <button class="btn btn--diamond" @click="openSettingsModal">
                     <i class="icon icon--hammer"></i>
@@ -26,6 +29,7 @@ import Divider from '../Divider.vue';
 import Logo from '../Logo.vue';
 import ConfirmModal from '../modals/templates/ConfirmModal.vue';
 import InputModal from '../modals/templates/InputModal.vue';
+import { useTokenStore } from '@/stores/token-store';
 
 const activePage = ref('home');
 
@@ -34,7 +38,7 @@ function openSettingsModal() {
         title: 'Settings',
         message: 'Settings modal opened',
         confirmText: 'Close',
-        confirmAction: () => ModalController.close(),
+        onConfirm: () => ModalController.close(),
     });
 }
 
@@ -88,6 +92,10 @@ nav {
 
     .logo {
         margin-right: 8rem;
+    }
+
+    ul {
+        color: var(--color-on-surface);
     }
 
     .user-actions {

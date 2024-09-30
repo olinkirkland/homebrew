@@ -23,4 +23,3 @@ router.get('/', (req, res) => {
 });
 
 export { router as routes };
-
