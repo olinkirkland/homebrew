@@ -1,7 +1,6 @@
 <template>
     <nav>
         <div class="nav__background"></div>
-
         <div class="nav__content">
             <Logo />
             <ul class="row gap center">
@@ -23,8 +22,6 @@
                 </button>
             </div>
         </div>
-
-        <Divider />
     </nav>
 </template>
 
@@ -33,7 +30,6 @@ import ModalController from '@/controllers/modal-controller';
 import { useTokenStore } from '@/stores/token-store';
 import { shorten } from '@/utils/string-utils';
 import { ref } from 'vue';
-import Divider from '../Divider.vue';
 import Logo from '../Logo.vue';
 import ConfirmModal from '../modals/templates/ConfirmModal.vue';
 import InputModal from '../modals/templates/InputModal.vue';
@@ -88,13 +84,6 @@ nav {
         left: 0;
         width: 100%;
         height: 100%;
-        // Gradient black top down
-        background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.4) 100%
-        );
-        backdrop-filter: blur(10px);
     }
 
     .logo {

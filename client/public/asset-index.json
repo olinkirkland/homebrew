@@ -1,0 +1,926 @@
+[
+    {
+        "name": "android-chrome-192x192.png",
+        "path": "assets/favicon/android-chrome-192x192.png",
+        "type": "png",
+        "size": 19620
+    },
+    {
+        "name": "android-chrome-512x512.png",
+        "path": "assets/favicon/android-chrome-512x512.png",
+        "type": "png",
+        "size": 90204
+    },
+    {
+        "name": "apple-touch-icon.png",
+        "path": "assets/favicon/apple-touch-icon.png",
+        "type": "png",
+        "size": 18493
+    },
+    {
+        "name": "favicon-16x16.png",
+        "path": "assets/favicon/favicon-16x16.png",
+        "type": "png",
+        "size": 681
+    },
+    {
+        "name": "favicon-32x32.png",
+        "path": "assets/favicon/favicon-32x32.png",
+        "type": "png",
+        "size": 1558
+    },
+    {
+        "name": "favicon.ico",
+        "path": "assets/favicon/favicon.ico",
+        "type": "ico",
+        "size": 15406
+    },
+    {
+        "name": "close.png",
+        "path": "assets/icons/close.png",
+        "type": "png",
+        "size": 389
+    },
+    {
+        "name": "hammer.png",
+        "path": "assets/icons/hammer.png",
+        "type": "png",
+        "size": 872
+    },
+    {
+        "name": "user.png",
+        "path": "assets/icons/user.png",
+        "type": "png",
+        "size": 983
+    },
+    {
+        "name": "background.jpg",
+        "path": "assets/images/background.jpg",
+        "type": "jpg",
+        "size": 232995
+    },
+    {
+        "name": "background2.jpg",
+        "path": "assets/images/background2.jpg",
+        "type": "jpg",
+        "size": 440891
+    },
+    {
+        "name": "background3.jpg",
+        "path": "assets/images/background3.jpg",
+        "type": "jpg",
+        "size": 3580116
+    },
+    {
+        "name": "floral.jpg",
+        "path": "assets/images/floral.jpg",
+        "type": "jpg",
+        "size": 290312
+    },
+    {
+        "name": "logo.png",
+        "path": "assets/images/logo.png",
+        "type": "png",
+        "size": 1580
+    },
+    {
+        "name": "panel-border-000.png",
+        "path": "assets/ui/border/panel-border-000.png",
+        "type": "png",
+        "size": 174
+    },
+    {
+        "name": "panel-border-001.png",
+        "path": "assets/ui/border/panel-border-001.png",
+        "type": "png",
+        "size": 157
+    },
+    {
+        "name": "panel-border-002.png",
+        "path": "assets/ui/border/panel-border-002.png",
+        "type": "png",
+        "size": 179
+    },
+    {
+        "name": "panel-border-003.png",
+        "path": "assets/ui/border/panel-border-003.png",
+        "type": "png",
+        "size": 173
+    },
+    {
+        "name": "panel-border-004.png",
+        "path": "assets/ui/border/panel-border-004.png",
+        "type": "png",
+        "size": 151
+    },
+    {
+        "name": "panel-border-005.png",
+        "path": "assets/ui/border/panel-border-005.png",
+        "type": "png",
+        "size": 175
+    },
+    {
+        "name": "panel-border-006.png",
+        "path": "assets/ui/border/panel-border-006.png",
+        "type": "png",
+        "size": 182
+    },
+    {
+        "name": "panel-border-007.png",
+        "path": "assets/ui/border/panel-border-007.png",
+        "type": "png",
+        "size": 183
+    },
+    {
+        "name": "panel-border-008.png",
+        "path": "assets/ui/border/panel-border-008.png",
+        "type": "png",
+        "size": 161
+    },
+    {
+        "name": "panel-border-009.png",
+        "path": "assets/ui/border/panel-border-009.png",
+        "type": "png",
+        "size": 161
+    },
+    {
+        "name": "panel-border-010.png",
+        "path": "assets/ui/border/panel-border-010.png",
+        "type": "png",
+        "size": 170
+    },
+    {
+        "name": "panel-border-011.png",
+        "path": "assets/ui/border/panel-border-011.png",
+        "type": "png",
+        "size": 178
+    },
+    {
+        "name": "panel-border-012.png",
+        "path": "assets/ui/border/panel-border-012.png",
+        "type": "png",
+        "size": 176
+    },
+    {
+        "name": "panel-border-013.png",
+        "path": "assets/ui/border/panel-border-013.png",
+        "type": "png",
+        "size": 173
+    },
+    {
+        "name": "panel-border-014.png",
+        "path": "assets/ui/border/panel-border-014.png",
+        "type": "png",
+        "size": 173
+    },
+    {
+        "name": "panel-border-015.png",
+        "path": "assets/ui/border/panel-border-015.png",
+        "type": "png",
+        "size": 136
+    },
+    {
+        "name": "panel-border-016.png",
+        "path": "assets/ui/border/panel-border-016.png",
+        "type": "png",
+        "size": 180
+    },
+    {
+        "name": "panel-border-017.png",
+        "path": "assets/ui/border/panel-border-017.png",
+        "type": "png",
+        "size": 181
+    },
+    {
+        "name": "panel-border-018.png",
+        "path": "assets/ui/border/panel-border-018.png",
+        "type": "png",
+        "size": 183
+    },
+    {
+        "name": "panel-border-019.png",
+        "path": "assets/ui/border/panel-border-019.png",
+        "type": "png",
+        "size": 183
+    },
+    {
+        "name": "panel-border-020.png",
+        "path": "assets/ui/border/panel-border-020.png",
+        "type": "png",
+        "size": 185
+    },
+    {
+        "name": "panel-border-021.png",
+        "path": "assets/ui/border/panel-border-021.png",
+        "type": "png",
+        "size": 186
+    },
+    {
+        "name": "panel-border-022.png",
+        "path": "assets/ui/border/panel-border-022.png",
+        "type": "png",
+        "size": 180
+    },
+    {
+        "name": "panel-border-023.png",
+        "path": "assets/ui/border/panel-border-023.png",
+        "type": "png",
+        "size": 176
+    },
+    {
+        "name": "panel-border-024.png",
+        "path": "assets/ui/border/panel-border-024.png",
+        "type": "png",
+        "size": 189
+    },
+    {
+        "name": "panel-border-025.png",
+        "path": "assets/ui/border/panel-border-025.png",
+        "type": "png",
+        "size": 211
+    },
+    {
+        "name": "panel-border-026.png",
+        "path": "assets/ui/border/panel-border-026.png",
+        "type": "png",
+        "size": 200
+    },
+    {
+        "name": "panel-border-027.png",
+        "path": "assets/ui/border/panel-border-027.png",
+        "type": "png",
+        "size": 185
+    },
+    {
+        "name": "panel-border-028.png",
+        "path": "assets/ui/border/panel-border-028.png",
+        "type": "png",
+        "size": 170
+    },
+    {
+        "name": "panel-border-029.png",
+        "path": "assets/ui/border/panel-border-029.png",
+        "type": "png",
+        "size": 192
+    },
+    {
+        "name": "panel-border-030.png",
+        "path": "assets/ui/border/panel-border-030.png",
+        "type": "png",
+        "size": 177
+    },
+    {
+        "name": "panel-border-031.png",
+        "path": "assets/ui/border/panel-border-031.png",
+        "type": "png",
+        "size": 186
+    },
+    {
+        "name": "divider-000.png",
+        "path": "assets/ui/divider/divider-000.png",
+        "type": "png",
+        "size": 158
+    },
+    {
+        "name": "divider-001.png",
+        "path": "assets/ui/divider/divider-001.png",
+        "type": "png",
+        "size": 137
+    },
+    {
+        "name": "divider-002.png",
+        "path": "assets/ui/divider/divider-002.png",
+        "type": "png",
+        "size": 133
+    },
+    {
+        "name": "divider-003.png",
+        "path": "assets/ui/divider/divider-003.png",
+        "type": "png",
+        "size": 157
+    },
+    {
+        "name": "divider-004.png",
+        "path": "assets/ui/divider/divider-004.png",
+        "type": "png",
+        "size": 152
+    },
+    {
+        "name": "divider-005.png",
+        "path": "assets/ui/divider/divider-005.png",
+        "type": "png",
+        "size": 157
+    },
+    {
+        "name": "divider-fade-000.png",
+        "path": "assets/ui/divider-fade/divider-fade-000.png",
+        "type": "png",
+        "size": 288
+    },
+    {
+        "name": "divider-fade-001.png",
+        "path": "assets/ui/divider-fade/divider-fade-001.png",
+        "type": "png",
+        "size": 257
+    },
+    {
+        "name": "divider-fade-002.png",
+        "path": "assets/ui/divider-fade/divider-fade-002.png",
+        "type": "png",
+        "size": 161
+    },
+    {
+        "name": "divider-fade-003.png",
+        "path": "assets/ui/divider-fade/divider-fade-003.png",
+        "type": "png",
+        "size": 269
+    },
+    {
+        "name": "divider-fade-004.png",
+        "path": "assets/ui/divider-fade/divider-fade-004.png",
+        "type": "png",
+        "size": 229
+    },
+    {
+        "name": "divider-fade-005.png",
+        "path": "assets/ui/divider-fade/divider-fade-005.png",
+        "type": "png",
+        "size": 264
+    },
+    {
+        "name": "panel-000.png",
+        "path": "assets/ui/panel/panel-000.png",
+        "type": "png",
+        "size": 184
+    },
+    {
+        "name": "panel-001.png",
+        "path": "assets/ui/panel/panel-001.png",
+        "type": "png",
+        "size": 173
+    },
+    {
+        "name": "panel-002.png",
+        "path": "assets/ui/panel/panel-002.png",
+        "type": "png",
+        "size": 189
+    },
+    {
+        "name": "panel-003.png",
+        "path": "assets/ui/panel/panel-003.png",
+        "type": "png",
+        "size": 180
+    },
+    {
+        "name": "panel-004.png",
+        "path": "assets/ui/panel/panel-004.png",
+        "type": "png",
+        "size": 153
+    },
+    {
+        "name": "panel-005.png",
+        "path": "assets/ui/panel/panel-005.png",
+        "type": "png",
+        "size": 189
+    },
+    {
+        "name": "panel-006.png",
+        "path": "assets/ui/panel/panel-006.png",
+        "type": "png",
+        "size": 193
+    },
+    {
+        "name": "panel-007.png",
+        "path": "assets/ui/panel/panel-007.png",
+        "type": "png",
+        "size": 194
+    },
+    {
+        "name": "panel-008.png",
+        "path": "assets/ui/panel/panel-008.png",
+        "type": "png",
+        "size": 193
+    },
+    {
+        "name": "panel-009.png",
+        "path": "assets/ui/panel/panel-009.png",
+        "type": "png",
+        "size": 175
+    },
+    {
+        "name": "panel-010.png",
+        "path": "assets/ui/panel/panel-010.png",
+        "type": "png",
+        "size": 181
+    },
+    {
+        "name": "panel-011.png",
+        "path": "assets/ui/panel/panel-011.png",
+        "type": "png",
+        "size": 188
+    },
+    {
+        "name": "panel-012.png",
+        "path": "assets/ui/panel/panel-012.png",
+        "type": "png",
+        "size": 188
+    },
+    {
+        "name": "panel-013.png",
+        "path": "assets/ui/panel/panel-013.png",
+        "type": "png",
+        "size": 181
+    },
+    {
+        "name": "panel-014.png",
+        "path": "assets/ui/panel/panel-014.png",
+        "type": "png",
+        "size": 181
+    },
+    {
+        "name": "panel-015.png",
+        "path": "assets/ui/panel/panel-015.png",
+        "type": "png",
+        "size": 141
+    },
+    {
+        "name": "panel-016.png",
+        "path": "assets/ui/panel/panel-016.png",
+        "type": "png",
+        "size": 198
+    },
+    {
+        "name": "panel-017.png",
+        "path": "assets/ui/panel/panel-017.png",
+        "type": "png",
+        "size": 196
+    },
+    {
+        "name": "panel-018.png",
+        "path": "assets/ui/panel/panel-018.png",
+        "type": "png",
+        "size": 192
+    },
+    {
+        "name": "panel-019.png",
+        "path": "assets/ui/panel/panel-019.png",
+        "type": "png",
+        "size": 191
+    },
+    {
+        "name": "panel-020.png",
+        "path": "assets/ui/panel/panel-020.png",
+        "type": "png",
+        "size": 194
+    },
+    {
+        "name": "panel-021.png",
+        "path": "assets/ui/panel/panel-021.png",
+        "type": "png",
+        "size": 198
+    },
+    {
+        "name": "panel-022.png",
+        "path": "assets/ui/panel/panel-022.png",
+        "type": "png",
+        "size": 192
+    },
+    {
+        "name": "panel-023.png",
+        "path": "assets/ui/panel/panel-023.png",
+        "type": "png",
+        "size": 186
+    },
+    {
+        "name": "panel-024.png",
+        "path": "assets/ui/panel/panel-024.png",
+        "type": "png",
+        "size": 197
+    },
+    {
+        "name": "panel-025.png",
+        "path": "assets/ui/panel/panel-025.png",
+        "type": "png",
+        "size": 220
+    },
+    {
+        "name": "panel-026.png",
+        "path": "assets/ui/panel/panel-026.png",
+        "type": "png",
+        "size": 206
+    },
+    {
+        "name": "panel-027.png",
+        "path": "assets/ui/panel/panel-027.png",
+        "type": "png",
+        "size": 194
+    },
+    {
+        "name": "panel-028.png",
+        "path": "assets/ui/panel/panel-028.png",
+        "type": "png",
+        "size": 181
+    },
+    {
+        "name": "panel-029.png",
+        "path": "assets/ui/panel/panel-029.png",
+        "type": "png",
+        "size": 196
+    },
+    {
+        "name": "panel-030.png",
+        "path": "assets/ui/panel/panel-030.png",
+        "type": "png",
+        "size": 182
+    },
+    {
+        "name": "panel-031.png",
+        "path": "assets/ui/panel/panel-031.png",
+        "type": "png",
+        "size": 194
+    },
+    {
+        "name": "panel-transparent-border-000.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-000.png",
+        "type": "png",
+        "size": 201
+    },
+    {
+        "name": "panel-transparent-border-001.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-001.png",
+        "type": "png",
+        "size": 186
+    },
+    {
+        "name": "panel-transparent-border-002.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-002.png",
+        "type": "png",
+        "size": 205
+    },
+    {
+        "name": "panel-transparent-border-003.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-003.png",
+        "type": "png",
+        "size": 186
+    },
+    {
+        "name": "panel-transparent-border-004.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-004.png",
+        "type": "png",
+        "size": 170
+    },
+    {
+        "name": "panel-transparent-border-005.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-005.png",
+        "type": "png",
+        "size": 202
+    },
+    {
+        "name": "panel-transparent-border-006.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-006.png",
+        "type": "png",
+        "size": 207
+    },
+    {
+        "name": "panel-transparent-border-007.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-007.png",
+        "type": "png",
+        "size": 210
+    },
+    {
+        "name": "panel-transparent-border-008.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-008.png",
+        "type": "png",
+        "size": 206
+    },
+    {
+        "name": "panel-transparent-border-009.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-009.png",
+        "type": "png",
+        "size": 187
+    },
+    {
+        "name": "panel-transparent-border-010.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-010.png",
+        "type": "png",
+        "size": 196
+    },
+    {
+        "name": "panel-transparent-border-011.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-011.png",
+        "type": "png",
+        "size": 205
+    },
+    {
+        "name": "panel-transparent-border-012.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-012.png",
+        "type": "png",
+        "size": 204
+    },
+    {
+        "name": "panel-transparent-border-013.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-013.png",
+        "type": "png",
+        "size": 198
+    },
+    {
+        "name": "panel-transparent-border-014.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-014.png",
+        "type": "png",
+        "size": 194
+    },
+    {
+        "name": "panel-transparent-border-015.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-015.png",
+        "type": "png",
+        "size": 154
+    },
+    {
+        "name": "panel-transparent-border-016.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-016.png",
+        "type": "png",
+        "size": 219
+    },
+    {
+        "name": "panel-transparent-border-017.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-017.png",
+        "type": "png",
+        "size": 217
+    },
+    {
+        "name": "panel-transparent-border-018.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-018.png",
+        "type": "png",
+        "size": 205
+    },
+    {
+        "name": "panel-transparent-border-019.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-019.png",
+        "type": "png",
+        "size": 203
+    },
+    {
+        "name": "panel-transparent-border-020.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-020.png",
+        "type": "png",
+        "size": 212
+    },
+    {
+        "name": "panel-transparent-border-021.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-021.png",
+        "type": "png",
+        "size": 210
+    },
+    {
+        "name": "panel-transparent-border-022.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-022.png",
+        "type": "png",
+        "size": 207
+    },
+    {
+        "name": "panel-transparent-border-023.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-023.png",
+        "type": "png",
+        "size": 201
+    },
+    {
+        "name": "panel-transparent-border-024.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-024.png",
+        "type": "png",
+        "size": 206
+    },
+    {
+        "name": "panel-transparent-border-025.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-025.png",
+        "type": "png",
+        "size": 232
+    },
+    {
+        "name": "panel-transparent-border-026.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-026.png",
+        "type": "png",
+        "size": 224
+    },
+    {
+        "name": "panel-transparent-border-027.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-027.png",
+        "type": "png",
+        "size": 213
+    },
+    {
+        "name": "panel-transparent-border-028.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-028.png",
+        "type": "png",
+        "size": 196
+    },
+    {
+        "name": "panel-transparent-border-029.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-029.png",
+        "type": "png",
+        "size": 216
+    },
+    {
+        "name": "panel-transparent-border-030.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-030.png",
+        "type": "png",
+        "size": 199
+    },
+    {
+        "name": "panel-transparent-border-031.png",
+        "path": "assets/ui/transparent-border/panel-transparent-border-031.png",
+        "type": "png",
+        "size": 213
+    },
+    {
+        "name": "panel-transparent-center-000.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-000.png",
+        "type": "png",
+        "size": 201
+    },
+    {
+        "name": "panel-transparent-center-001.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-001.png",
+        "type": "png",
+        "size": 186
+    },
+    {
+        "name": "panel-transparent-center-002.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-002.png",
+        "type": "png",
+        "size": 205
+    },
+    {
+        "name": "panel-transparent-center-003.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-003.png",
+        "type": "png",
+        "size": 188
+    },
+    {
+        "name": "panel-transparent-center-004.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-004.png",
+        "type": "png",
+        "size": 171
+    },
+    {
+        "name": "panel-transparent-center-005.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-005.png",
+        "type": "png",
+        "size": 202
+    },
+    {
+        "name": "panel-transparent-center-006.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-006.png",
+        "type": "png",
+        "size": 209
+    },
+    {
+        "name": "panel-transparent-center-007.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-007.png",
+        "type": "png",
+        "size": 209
+    },
+    {
+        "name": "panel-transparent-center-008.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-008.png",
+        "type": "png",
+        "size": 208
+    },
+    {
+        "name": "panel-transparent-center-009.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-009.png",
+        "type": "png",
+        "size": 187
+    },
+    {
+        "name": "panel-transparent-center-010.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-010.png",
+        "type": "png",
+        "size": 197
+    },
+    {
+        "name": "panel-transparent-center-011.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-011.png",
+        "type": "png",
+        "size": 205
+    },
+    {
+        "name": "panel-transparent-center-012.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-012.png",
+        "type": "png",
+        "size": 204
+    },
+    {
+        "name": "panel-transparent-center-013.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-013.png",
+        "type": "png",
+        "size": 198
+    },
+    {
+        "name": "panel-transparent-center-014.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-014.png",
+        "type": "png",
+        "size": 194
+    },
+    {
+        "name": "panel-transparent-center-015.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-015.png",
+        "type": "png",
+        "size": 154
+    },
+    {
+        "name": "panel-transparent-center-016.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-016.png",
+        "type": "png",
+        "size": 217
+    },
+    {
+        "name": "panel-transparent-center-017.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-017.png",
+        "type": "png",
+        "size": 216
+    },
+    {
+        "name": "panel-transparent-center-018.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-018.png",
+        "type": "png",
+        "size": 204
+    },
+    {
+        "name": "panel-transparent-center-019.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-019.png",
+        "type": "png",
+        "size": 204
+    },
+    {
+        "name": "panel-transparent-center-020.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-020.png",
+        "type": "png",
+        "size": 213
+    },
+    {
+        "name": "panel-transparent-center-021.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-021.png",
+        "type": "png",
+        "size": 211
+    },
+    {
+        "name": "panel-transparent-center-022.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-022.png",
+        "type": "png",
+        "size": 207
+    },
+    {
+        "name": "panel-transparent-center-023.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-023.png",
+        "type": "png",
+        "size": 201
+    },
+    {
+        "name": "panel-transparent-center-024.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-024.png",
+        "type": "png",
+        "size": 208
+    },
+    {
+        "name": "panel-transparent-center-025.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-025.png",
+        "type": "png",
+        "size": 235
+    },
+    {
+        "name": "panel-transparent-center-026.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-026.png",
+        "type": "png",
+        "size": 224
+    },
+    {
+        "name": "panel-transparent-center-027.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-027.png",
+        "type": "png",
+        "size": 213
+    },
+    {
+        "name": "panel-transparent-center-028.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-028.png",
+        "type": "png",
+        "size": 197
+    },
+    {
+        "name": "panel-transparent-center-029.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-029.png",
+        "type": "png",
+        "size": 216
+    },
+    {
+        "name": "panel-transparent-center-030.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-030.png",
+        "type": "png",
+        "size": 199
+    },
+    {
+        "name": "panel-transparent-center-031.png",
+        "path": "assets/ui/transparent-center/panel-transparent-center-031.png",
+        "type": "png",
+        "size": 213
+    }
+]

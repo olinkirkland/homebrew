@@ -17,10 +17,6 @@ import TheNavigation from './layout/TheNavigation.vue';
 .layout {
     width: 100%;
     height: 100vh;
-    background-image: url('assets/images/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 
     display: flex;
     flex-direction: column;
@@ -28,6 +24,5 @@ import TheNavigation from './layout/TheNavigation.vue';
 
 .page-container {
     flex: 1;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 </style>

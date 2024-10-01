@@ -1,7 +1,7 @@
-import { router } from '@/router';
-import axios, { HttpStatusCode } from 'axios';
 import { logout } from '@/api/account';
+import { router } from '@/router';
 import { useTokenStore } from '@/stores/token-store';
+import axios, { HttpStatusCode } from 'axios';
 
 export const BASE_URL =
   // false
@@ -83,7 +83,7 @@ export function addInterceptors() {
  * @returns {Promise} The response from the server
  * @throws {Promise} If the refresh token is invalid
  */
-export async function fetchAccessToken() {
+export async function fetchAccessToken(): Promise<any> {
   let response;
   try {
     console.log(
@@ -95,7 +95,6 @@ export async function fetchAccessToken() {
     });
     return response;
   } catch (error) {
-    console.error('Invalid refresh token');
     logout();
     return Promise.reject('Invalid refresh token');
   }

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const useTokenStore = defineStore('auth', () => {
+export const useTokenStore = defineStore('tokens', () => {
   const refreshToken = ref();
   const accessToken = ref();
 

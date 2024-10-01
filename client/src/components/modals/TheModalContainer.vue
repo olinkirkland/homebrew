@@ -92,17 +92,9 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
         position: absolute;
         top: 0;
         z-index: -1;
-        background: repeating-linear-gradient(
-            45deg,
-            rgba(60, 60, 80, 0.6),
-            rgb(60, 60, 80, 0.6) 1rem,
-            rgba(65, 65, 90, 0.6) 1rem,
-            rgb(65, 65, 90, 0.6) 2rem
-        );
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        background-color: var(--color-background);
         transition: all 0.2s;
-        opacity: 1;
+        opacity: 0.6;
     }
 
     &:not(.active) {
