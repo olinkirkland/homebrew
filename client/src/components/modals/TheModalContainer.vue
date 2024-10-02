@@ -2,6 +2,10 @@
     <div class="modal-container" :class="{ active: !!currentModal }">
         <div
             class="modal-container__background"
+            :class="{
+                'modal-container__background--opaque':
+                    currentModalConfig?.opaque,
+            }"
             @click="onClickBackground()"
         ></div>
         <component
@@ -95,6 +99,10 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
         background-color: var(--color-background);
         transition: all 0.2s;
         opacity: 0.6;
+
+        &--opaque {
+            opacity: 1;
+        }
     }
 
     &:not(.active) {
@@ -132,13 +140,6 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
     to {
         opacity: 1;
         transform: scale(1);
-    }
-}
-
-// Variations
-.opaque {
-    > .modal-container__background {
-        background-color: var(--black);
     }
 }
 

@@ -1,6 +1,5 @@
 import LoadingModal from '@/components/modals/templates/LoadingModal.vue';
 import ModalController from '@/controllers/modal-controller';
-import { wait } from '@/utils/browser-utils';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -20,12 +19,13 @@ export const useAssetStore = defineStore('assets', () => {
     const preloadAssets = async () => {
         const assetsIndexPath = '/asset-index.json';
         assets.value = await fetch(assetsIndexPath).then(res => res.json());
-        // Check the cache
-        
 
+        // Todo: Check the cache?
 
         for (const assetMetadata of assets.value) {
-            ModalController.open(LoadingModal, { message: `Loading assets... (${assets.value.indexOf(assetMetadata) + 1}/${assets.value.length})` });
+            ModalController.open(LoadingModal, {
+                message: 'Loading assets...', progress: assets.value.indexOf(assetMetadata) / assets.value.length, opaque: true
+            });
             assetMetadata.isLoaded = false;
             try {
                 await preloadAsset(assetMetadata.path);

@@ -1,6 +1,11 @@
 <template>
     <div class="page">
-        <h1>HOME</h1>
+        <div>
+            <Panel :design="PanelType.PanelBorder000">
+                <h1>Hello world</h1>
+                <p>This is a test</p>
+            </Panel>
+        </div>
         <div class="background">
             <div class="pattern"></div>
             <div class="color"></div>
@@ -8,13 +13,12 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Panel from '../panels/Panel.vue';
+import { PanelType } from '../panels/PanelType';
+</script>
 
 <style lang="scss">
-.page {
-    // border: 2px solid red;
-}
-
 .background {
     position: absolute;
     height: 100vh;

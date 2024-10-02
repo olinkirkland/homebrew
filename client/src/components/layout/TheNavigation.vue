@@ -34,8 +34,6 @@ import Logo from '../Logo.vue';
 import ConfirmModal from '../modals/templates/ConfirmModal.vue';
 import InputModal from '../modals/templates/InputModal.vue';
 
-const activePage = ref('home');
-
 function openSettingsModal() {
     ModalController.open(ConfirmModal, {
         title: 'Settings',
