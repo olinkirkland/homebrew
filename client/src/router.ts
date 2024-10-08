@@ -84,11 +84,9 @@ router.beforeEach(async (to, from, next) => {
             }
         }
 
-        await wait(0.4);
         if (response) {
             ModalController.close();
         } else {
-            await wait(0.4);
             ModalController.open(ErrorModal, {
                 message: 'Failed to connect.', buttonLabel: 'Reload', onClickButton: reloadPage
             });

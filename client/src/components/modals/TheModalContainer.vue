@@ -102,6 +102,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 
         &--opaque {
             opacity: 1;
+            transition: all 0.2s;
         }
     }
 

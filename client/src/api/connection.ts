@@ -1,7 +1,7 @@
 import { logout } from '@/api/account';
 import { router } from '@/router';
 import { useTokenStore } from '@/stores/token-store';
-import axios, { HttpStatusCode } from 'axios';
+import axios, { AxiosError, HttpStatusCode } from 'axios';
 
 export const BASE_URL =
   // false
@@ -68,8 +68,7 @@ export function addInterceptors() {
         // This is done by returning the server call with the original config
         // Add the new access token to the Authorization header
         const config = error.config;
-        config.headers['Authorization'] = `Bearer ${useTokenStore().accessToken
-          }`;
+        config.headers['Authorization'] = `Bearer ${useTokenStore().accessToken}`;
         return server(config);
       }
 
@@ -94,7 +93,10 @@ export async function fetchAccessToken(): Promise<any> {
       refreshToken: useTokenStore().refreshToken
     });
     return response;
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.code === 'ERR_NETWORK')
+      return Promise.reject('Network error');
+
     logout();
     return Promise.reject('Invalid refresh token');
   }
