@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@types/cors": "^2.8.17",
-    "cors": "^2.8.5",
-    "open-color": "^1.9.1"
-  }
-}

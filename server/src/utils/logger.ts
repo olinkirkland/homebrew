@@ -32,38 +32,53 @@ export const logger = createLogger({
     transports: transports
 });
 
-function formatMetadata(metadata: Record<string, any>, indent = '', isLast = true): string {
+function formatMetadata(metadata: Record<string, any>): string {
     if (!Object.keys(metadata).length) return '';
 
-    const lines: string[] = [];
-    const entries = Object.entries(metadata);
-    entries.forEach(([key, value], index) => {
-        const isCurrentLast = index === entries.length - 1;
+    const pathsAndValues = extractPathsAndValues(metadata);
+    return `\u001b[90m${renderTree(pathsAndValues)}\u001b[39m`;
+}
 
-        if (Array.isArray(value)) {
-            lines.push(`${indent}${isCurrentLast ? '└─' : '├─'} ${key}`);
-            value.forEach((item, itemIndex) => {
-                const itemIsLast = itemIndex === value.length - 1;
-                if (typeof item === 'object' && item !== null) {
-                    lines.push(`${indent}${isCurrentLast ? '   ' : '│  '}${itemIsLast ? '└─' : '├─'} ${itemIndex}`);
-                    lines.push(formatMetadata(item, `${indent}${isCurrentLast ? '   ' : '│  '}   `, itemIsLast));
-                } else {
-                    lines.push(`${indent}${isCurrentLast ? '   ' : '│  '}${itemIsLast ? '└─' : '├─'} ${item}`);
-                }
-            });
-        } else if (typeof value === 'object' && value !== null) {
-            lines.push(`${indent}${isCurrentLast ? '└─' : '├─'} ${key}`);
-            lines.push(formatMetadata(value, `${indent}${isCurrentLast ? '   ' : '│  '}`, isCurrentLast));
+function extractPathsAndValues(obj: any, parentKeys: string[] = []): { keys: string[], value: any }[] {
+    let result: { keys: string[], value: any }[] = [];
+
+    Object.keys(obj).forEach((key) => {
+        const currentKeys = [...parentKeys, key];
+        const value = obj[key];
+
+        if (typeof value === "object" && value !== null) {
+            if (Array.isArray(value)) {
+                // For arrays, include the index in the key path
+                result.push({ keys: currentKeys, value: null });
+                value.forEach((item, index) => {
+                    const arrayKeys = [...currentKeys, String(index)];
+                    if (typeof item === "object" && item !== null) {
+                        result.push({ keys: arrayKeys, value: null });
+                        result = result.concat(extractPathsAndValues(item, arrayKeys));
+                    } else {
+                        result.push({ keys: arrayKeys, value: item });
+                    }
+                });
+            } else {
+                // If it's a nested object, store null for its value and recurse
+                result.push({ keys: currentKeys, value: null });
+                result = result.concat(extractPathsAndValues(value, currentKeys));
+            }
         } else {
-            lines.push(`${indent}${isCurrentLast ? '└─' : '├─'} ${key}: ${value}`);
+            // For primitive values, just store the full path and value
+            result.push({ keys: currentKeys, value });
         }
     });
 
-    const spaces = ' '.repeat(4);
-    lines.forEach((line, index) => {
-        lines[index] = `${spaces}${line}`;
-    });
-
-    return `\n\x1b[90m${lines.join('\n')}\x1b[0m`; // gray color
+    return result;
 }
 
+function renderTree(pathsAndValues: { keys: string[], value: any }[]): string {
+    return pathsAndValues.map(({ keys, value }) => {
+        const indent = '  '.repeat(keys.length);
+        const key = `[${keys[keys.length - 1]}]`;
+        const printedValue = value ? ` ${value}` : ' ↓';
+
+        return indent + key + printedValue;
+    }).join('\n');
+}
