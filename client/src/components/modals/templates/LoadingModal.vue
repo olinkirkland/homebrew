@@ -1,7 +1,7 @@
 <template>
     <div class="loading">
         <Logo />
-        <h3>{{ message }}</h3>
+        <h3 v-if="message">{{ message }}</h3>
         <div v-if="progress >= 0" class="progress-bar">
             <div
                 class="progress-bar__fill"
@@ -18,7 +18,7 @@ import { ref } from 'vue';
 const props = defineProps({
     message: {
         type: String,
-        default: 'Loading...',
+        default: null,
     },
     progress: {
         type: Number,

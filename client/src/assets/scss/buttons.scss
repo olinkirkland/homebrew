@@ -61,7 +61,7 @@ button.btn.btn--diamond {
     align-items: center;
 
     &::before {
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow-sm);
         transform: rotate(45deg);
         @include border-image-common('panel/panel-001', 0);
     }

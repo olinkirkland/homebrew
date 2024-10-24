@@ -32,7 +32,7 @@ import { PanelType } from '../panels/PanelType';
         width: 100%;
         height: 100%;
         background-image: url('/assets/images/floral.jpg');
-        opacity: 0.05;
+        opacity: 0.02;
         background-repeat: repeat;
         background-size: 40rem;
         z-index: 1;

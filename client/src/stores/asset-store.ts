@@ -20,15 +20,28 @@ export const useAssetStore = defineStore('assets', () => {
         const assetsIndexPath = '/asset-index.json';
         assets.value = await fetch(assetsIndexPath).then(res => res.json());
 
-        // Todo: Check the cache?
-
         for (const assetMetadata of assets.value) {
             ModalController.open(LoadingModal, {
-                message: 'Loading assets...', progress: assets.value.indexOf(assetMetadata) / assets.value.length, opaque: true
+                message: null, progress: assets.value.indexOf(assetMetadata) / assets.value.length, opaque: true
             });
             assetMetadata.isLoaded = false;
             try {
-                await preloadAsset(assetMetadata.path);
+                // Is it cached in the browser?
+                if (caches) {
+                    const cache = await caches.open('assets');
+                    const cachedResponse = await cache.match(assetMetadata.path);
+                    if (cachedResponse) {
+                        assetMetadata.isLoaded = true;
+                        continue;
+                    }
+                }
+
+                const asset = await preloadAsset(assetMetadata.path);
+                if (caches) {
+                    const cache = await caches.open('assets');
+                    cache.put(assetMetadata.path, new Response(asset as BodyInit));
+                }
+
                 assetMetadata.isLoaded = true;
             } catch (error) {
                 console.error('Error preloading asset', assetMetadata.path, error);
@@ -44,10 +57,10 @@ export const useAssetStore = defineStore('assets', () => {
     };
 });
 
-function preloadAsset(path: string) {
+async function preloadAsset(path: string) {
     return new Promise((resolve, reject) => {
         const asset = new Image();
-        asset.onload = resolve;
+        asset.onload = () => resolve(asset);
         asset.onerror = reject;
         asset.src = path;
     });
