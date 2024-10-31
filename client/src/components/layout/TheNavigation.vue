@@ -29,7 +29,6 @@
 import ModalController from '@/controllers/modal-controller';
 import { useTokenStore } from '@/stores/token-store';
 import { shorten } from '@/utils/string-utils';
-import { ref } from 'vue';
 import Logo from '../Logo.vue';
 import ConfirmModal from '../modals/templates/ConfirmModal.vue';
 import InputModal from '../modals/templates/InputModal.vue';
@@ -67,6 +66,7 @@ nav {
     height: 6.4rem;
     padding: 0 2.4rem;
     z-index: 1;
+    background-color: rgba(0, 0, 0, 0.05);
 
     .nav__content {
         display: grid;
@@ -89,15 +89,13 @@ nav {
     }
 
     ul {
-        color: var(--color-on-surface);
+        color: var(--color-on-surface-inverted);
     }
 
     .user-actions {
-        position: relative;
         display: flex;
         justify-content: flex-end;
         gap: 2.4rem;
-        top: 1.6rem;
     }
 }
 </style>

@@ -1,11 +1,20 @@
 <template>
     <div
         class="panel"
-        :style="{
-            'border-image-source': `url('assets/ui/${design}.png')`,
+        :class="{
+            'panel--dark': mode === 'dark',
+            'panel--light': mode === 'light',
         }"
     >
-        <slot></slot>
+        <div
+            class="panel__background"
+            :style="{
+                'border-image-source': `url('assets/ui/${design}')`,
+            }"
+        ></div>
+        <div class="panel__content">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -17,6 +26,10 @@ const props = defineProps({
         type: String,
         default: PanelType.PanelBorder000,
     },
+    mode: {
+        type: String, // 'light' | 'dark',
+        default: 'light',
+    },
 });
 </script>
 
@@ -24,8 +37,41 @@ const props = defineProps({
 @import '@/assets/scss/mixins.scss';
 
 .panel {
+    position: relative;
     min-width: 6.4rem;
     min-height: 4rem;
-    @include border-image-common('', 1);
+    padding: 1.6rem;
+    width: fit-content;
+
+    > .panel__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    > .panel__content {
+        position: relative;
+    }
+
+    &--dark {
+        .panel__background {
+            @include border-image-common('', 1);
+        }
+
+        & > * {
+            color: var(--color-on-surface);
+        }
+    }
+
+    &--light {
+        .panel__background {
+            @include border-image-common('', -1);
+        }
+        & > * {
+            color: var(--color-surface);
+        }
+    }
 }
 </style>

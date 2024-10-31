@@ -19,10 +19,10 @@
     }
 
     h1 {
-        color: var(--color-on-surface);
+        color: var(--color-on-surface-inverted);
         font-family: var(--font-logo);
         font-size: 2.8rem;
-        font-weight: 400;
+        font-weight: bold;
         text-shadow: var(--shadow-text);
     }
 }

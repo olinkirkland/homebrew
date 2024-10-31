@@ -1,9 +1,17 @@
 <template>
     <div class="page">
-        <div>
-            <Panel :design="PanelType.PanelBorder000">
+        <div class="panel-container">
+            <Panel :design="PanelType.Panel000">
                 <h1>Hello world</h1>
                 <p>This is a test</p>
+            </Panel>
+            <Panel :design="PanelType.Panel010" mode="dark">
+                <h1>Hello world #2</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                </p>
             </Panel>
         </div>
         <div class="background">
@@ -19,6 +27,13 @@ import { PanelType } from '../panels/PanelType';
 </script>
 
 <style lang="scss">
+.page > .panel-container {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.2rem;
+}
+
 .background {
     position: absolute;
     height: 100vh;
