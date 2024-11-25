@@ -115,7 +115,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 }
 
 .modal {
-    animation: animate-in 0.2s ease;
+    animation: animate-in 0.1s ease;
     max-height: calc(100vh - 4rem);
 }
 

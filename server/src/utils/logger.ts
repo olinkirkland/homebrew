@@ -6,7 +6,7 @@ import { LOGTAIL_TOKEN } from './config';
 // Define a format to print metadata in a gray color with indentation
 const formatWithMetadata = winston.format.printf(
     ({ timestamp, level, message, ...metadata }) => {
-        return `${timestamp} [${level}] ${message}${metadata ? formatMetadata(metadata) : ''}`;
+        return `${timestamp} [${level}] ${message}\n${metadata ? formatMetadata(metadata) : ''}`;
     }
 );
 
